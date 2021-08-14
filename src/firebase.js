@@ -1,6 +1,5 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'dotenv';
 
 // Log into the firebase account so I have access to 
 // auth and firestore
@@ -15,6 +14,9 @@ const app = firebase.initializeApp({
 
 // Initialize and export firebase auth
 export const auth = app.auth();
+
+// Initialize and export firestore
+export const firestore = firebase.firestore();
 
 // Export the initialized app
 export default app; 

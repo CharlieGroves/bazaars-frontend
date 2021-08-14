@@ -1,12 +1,7 @@
-import React, { useRef, useState } from "react";
-import "./App.css";
-import firebase from "firebase/app";
+import React, { useState } from "react";
+import "./css/App.css";
 import "firebase/firestore";
-import "firebase/auth";
-import { auth } from './firebase';
-
-const firestore = firebase.firestore();
-
+import { firestore } from './firebase';
 
 function App() {
 
