@@ -31,7 +31,7 @@ export default function Home() {
 				<button onClick={() => handleOnClick(googleProvider)}>
 					Google
 				</button>
-                <img src={currentUser.photoURL} alt="Google Profile" />
+				<img src={currentUser.photoURL} alt="Google Profile" />
 				<form onSubmit={AddMessage}>
 					<label>
 						Your Message: &nbsp;
