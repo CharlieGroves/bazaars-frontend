@@ -25,6 +25,7 @@ export function AuthenticationProvider({ children }) {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
+			setLoading(false);
 		});
 
 		return unsubscribe;
@@ -32,11 +33,11 @@ export function AuthenticationProvider({ children }) {
 
 	// An array of functions and values to return in the AuthenticationContext.Provider.
 	// It is an array so I can return more than one function/value.
-	const values = [currentUser, signup, login, logout];
+	const value = { currentUser, signup, login };
 
 	return (
-		<AuthenticationContext.Provider value={values}>
-			{children}
+		<AuthenticationContext.Provider value={value}>
+			{!loading && children}
 		</AuthenticationContext.Provider>
 	);
 }
