@@ -5,9 +5,10 @@ import { useAuth } from "../context/AuthenticationContext";
 
 export default function Home() {
 	const messagesRef = firestore.collection("messages");
+	//const shopRef = firestore.collection()
 	const [value, setValue] = useState("");
 	const { currentUser, logout } = useAuth();
-	currentUser && console.log(currentUser);
+	currentUser && console.log(currentUser.uid);
 
 	async function AddMessage(e) {
 		e.preventDefault();
