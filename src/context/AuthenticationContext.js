@@ -22,6 +22,10 @@ export function AuthenticationProvider({ children }) {
 		return await auth.signInWithEmailAndPassword(email, password);
 	}
 
+	async function logout() {
+		return await auth.signOut();
+	}
+
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
@@ -33,7 +37,7 @@ export function AuthenticationProvider({ children }) {
 
 	// An array of functions and values to return in the AuthenticationContext.Provider.
 	// It is an array so I can return more than one function/value.
-	const value = { currentUser, signup, login };
+	const value = { currentUser, signup, login, logout };
 
 	return (
 		<AuthenticationContext.Provider value={value}>

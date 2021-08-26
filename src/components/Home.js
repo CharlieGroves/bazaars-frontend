@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { firestore } from "../firebase";
-import { googleProvider } from "../context/authMethods";
 
+import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
-import socialMediaAuth from "../socialMediaAuth";
 
 export default function Home() {
 	const messagesRef = firestore.collection("messages");
 	const [value, setValue] = useState("");
-	const { currentUser } = useAuth();
+	const { currentUser, logout } = useAuth();
 	currentUser && console.log(currentUser);
 
 	async function AddMessage(e) {
@@ -20,17 +18,14 @@ export default function Home() {
 		});
 	}
 
-	const handleOnClick = async (provider) => {
-		const res = await socialMediaAuth(provider);
-		console.log(res);
-	};
+	async function HandleLogout(e) {
+		e.preventDefault();
+		await logout();
+	}
 
 	return (
 		<div className="App">
 			<header className="App-header">
-				<button onClick={() => handleOnClick(googleProvider)}>
-					Google
-				</button>
 				<img src={currentUser.photoURL} alt="Google Profile" />
 				<form onSubmit={AddMessage}>
 					<label>
@@ -42,6 +37,7 @@ export default function Home() {
 						/>
 					</label>
 					<input type="submit" name="Submit" />
+					<button onClick={HandleLogout}>log out</button>
 				</form>
 			</header>
 		</div>

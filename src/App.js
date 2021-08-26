@@ -5,13 +5,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 
 import Home from "./components/Home";
+import Root from "./components/Root";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
 	return (
 		<Router>
 			<AuthenticationProvider>
 				<Switch>
-					<Route path="/home" component={Home} />
+					<PrivateRoute path="/home" component={Home} />
+					<Route exact path="/" component={Root} />
 				</Switch>
 			</AuthenticationProvider>
 		</Router>
