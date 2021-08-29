@@ -29,6 +29,7 @@ export default function Root() {
 	const handleSignIn = async (provider) => {
 		setLoading(true);
 		const res = await socialMediaAuth(provider);
+		console.log(res);
 		setLoading(false);
 		history.push("/home");
 	};

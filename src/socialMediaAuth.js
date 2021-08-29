@@ -1,4 +1,5 @@
 import { auth } from "./firebase";
+import { useHistory } from "react-router";
 
 const socialMediaAuth = (provider) => {
 	return auth
