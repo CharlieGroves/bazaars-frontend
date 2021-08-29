@@ -48,7 +48,7 @@ export default function Home() {
 				<div className="flex-grid-master">
 					{shops &&
 						shops.map((shop, index) => (
-							<div>
+							<div key={index}>
 								<div>{shop.name}</div>
 								<div>{shop.description}</div>
 							</div>
