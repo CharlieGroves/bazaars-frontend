@@ -6,6 +6,7 @@ import {
 	useCollectionData,
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
+import { Link } from "react-router-dom";
 
 export default function Home() {
 	let uid;
@@ -49,10 +50,10 @@ export default function Home() {
 				<div className="flex-grid-master">
 					{shops &&
 						shops.map((shop, index) => (
-							<div key={index}>
+							<Link to={`/seller/${currentUser.uid}/${shop.name}`} key={index}>
 								<div>{shop.name}</div>
 								<div>{shop.description}</div>
-							</div>
+							</Link>
 						))}
 					<button onClick={newShopClickHandler}>
 						Make a new shop
