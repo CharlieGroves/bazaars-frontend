@@ -11,7 +11,7 @@ export default function Seller({
 	},
 }) {
 	const sellerRef = firestore.collection("users").doc(seller);
-    const [shopData] = useDocumentData(sellerRef)
-    shopData && console.log(shopData);
-	return <div>Seller {seller}</div>;
+	const [shopData] = useDocumentData(sellerRef);
+	shopData && console.log(shopData);
+	return <div>{<div>Seller {shopData && shopData.username}</div>}</div>;
 }

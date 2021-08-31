@@ -18,7 +18,8 @@ export default function Home() {
 	currentUser && (userRef = firestore.collection("users").doc(uid));
 	currentUser && (shopsRef = userRef.collection("shops"));
 	console.log(uid);
-
+	currentUser && console.log(currentUser.photoURL)
+	// currentUser && console.log(photoURL)
 	const [userData] = useDocumentData(userRef);
 	const [shops] = useCollectionData(shopsRef);
 
