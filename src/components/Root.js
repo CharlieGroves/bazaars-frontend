@@ -20,15 +20,16 @@ export default function Root() {
 	};
 
 	return (
-		<div>
-			{loading ? (
-				<div className="loader" />
-			) : (
-				<GoogleButton
-					className="google-login-button"
-					onClick={() => handleSignIn(googleProvider)}
-				/>
-			)}
+		<div className="google-login-button-container">
+			<div className="google-login-button">
+				{loading ? (
+					<div className="loader" />
+				) : (
+					<GoogleButton
+						onClick={() => handleSignIn(googleProvider)}
+					/>
+				)}
+			</div>
 		</div>
 	);
 }
