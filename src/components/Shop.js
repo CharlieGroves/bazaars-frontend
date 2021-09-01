@@ -1,29 +1,43 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import {
+	useCollectionData,
+	useDocumentData,
+} from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
+import { Link } from "react-router-dom";
 
 export default function Shop({
 	match: {
 		params: { seller, shop },
 	},
 }) {
-	const sellerRef = firestore
+	const shopRef = firestore
 		.collection("users")
 		.doc(seller)
-		.collection(shop);
-	const [shopData] = useCollectionData(sellerRef);
+		.collection("shops")
+		.doc(shop);
+	const itemsRef = shopRef.collection("items");
+	const [shopData] = useDocumentData(shopRef);
+	const [itemsData] = useCollectionData(itemsRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
+	const [itemPrice, setItemPrice] = useState(0);
 	const { currentUser } = useAuth();
 	let uid = "no user";
 
-	function creatingNewItemStateChange() {
+	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
 	}
 
 	const newItemHandler = async (e) => {
 		e.preventDefault();
+		await itemsRef.doc(itemName).set({
+			itemName: itemName,
+			itemPrice: itemPrice,
+		});
+		setItemName("");
+		setItemPrice(0);
 		console.log("new item handler function");
 	};
 	currentUser && (uid = currentUser.uid);
@@ -33,6 +47,27 @@ export default function Shop({
 				<div>
 					<div>Seller {seller}</div>
 					<div>Shop {shop}</div>
+					<div>
+						Items:
+						<ul>
+							{itemsData ? (
+								itemsData.map((item, index) => (
+									<div>
+										<Link
+											to={`/seller/${currentUser.uid}/${shop}/${item.name}`}
+											key={index}
+										>
+											{item.itemName}:
+											<br />
+										</Link>
+										£{item.itemPrice}
+									</div>
+								))
+							) : (
+								<div>No items in this shop</div>
+							)}
+						</ul>
+					</div>
 				</div>
 			) : (
 				<div>
@@ -56,14 +91,15 @@ export default function Shop({
 									Item Price: &nbsp;
 									<input
 										type="int"
-										value={itemName}
+										value={itemPrice}
 										onChange={(e) =>
-											setItemName(e.target.value)
+											setItemPrice(e.target.value)
 										}
 										min="0"
 										step="any"
 									/>
 								</label>
+								<button type="submit">Create</button>
 							</form>
 							<button onClick={creatingNewItemStateChange}>
 								Cancel
