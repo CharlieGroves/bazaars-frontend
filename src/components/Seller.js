@@ -1,8 +1,6 @@
 import React from "react";
 import { firestore } from "../firebase";
-import {
-	useDocumentData,
-} from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 
 export default function Seller({
 	match: {

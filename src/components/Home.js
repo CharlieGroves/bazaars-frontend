@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../css/Flex.css";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
 import {
@@ -28,7 +27,7 @@ export default function Home() {
 
 	const newShopHandler = async (e) => {
 		e.preventDefault();
-		await shopsRef.add({
+		await shopsRef.doc(shopName).set({
 			name: shopName,
 		});
 		setShopName("");
