@@ -41,7 +41,6 @@ export function AuthenticationProvider({ children }) {
 	useEffect(async () => {
 		if (currentUser != null) {
 			const { uid, displayName, photoURL } = currentUser;
-			console.log(currentUser)
 			await userRef.doc(uid).set({
 				username: displayName,
 				id: uid,

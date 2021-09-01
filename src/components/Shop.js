@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { firestore } from "../firebase";
 import {
 	useCollectionData,
-	useDocumentData,
+	//useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
+import "../css/Shop.css";
 
 export default function Shop({
 	match: {
@@ -18,11 +19,11 @@ export default function Shop({
 		.collection("shops")
 		.doc(shop);
 	const itemsRef = shopRef.collection("items");
-	const [shopData] = useDocumentData(shopRef);
+	//const [shopData] = useDocumentData(shopRef);
 	const [itemsData] = useCollectionData(itemsRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
-	const [itemPrice, setItemPrice] = useState(0);
+	const [itemPrice, setItemPrice] = useState();
 	const { currentUser } = useAuth();
 	let uid = "no user";
 
@@ -37,7 +38,7 @@ export default function Shop({
 			itemPrice: itemPrice,
 		});
 		setItemName("");
-		setItemPrice(0);
+		setItemPrice("");
 		console.log("new item handler function");
 	};
 	currentUser && (uid = currentUser.uid);
@@ -47,27 +48,6 @@ export default function Shop({
 				<div>
 					<div>Seller {seller}</div>
 					<div>Shop {shop}</div>
-					<div>
-						Items:
-						<ul>
-							{itemsData ? (
-								itemsData.map((item, index) => (
-									<div>
-										<Link
-											to={`/seller/${currentUser.uid}/${shop}/${item.name}`}
-											key={index}
-										>
-											{item.itemName}:
-											<br />
-										</Link>
-										£{item.itemPrice}
-									</div>
-								))
-							) : (
-								<div>No items in this shop</div>
-							)}
-						</ul>
-					</div>
 				</div>
 			) : (
 				<div>
@@ -112,6 +92,27 @@ export default function Shop({
 					)}
 				</div>
 			)}
+			Items: <br />
+			<div className="item-container">
+				{itemsData ? (
+					itemsData.map((item, index) => (
+						<div className="item" key={index}>
+							<Link
+								to={`/seller/${currentUser.uid}/${shop}/${item.name}`}
+								className="item-link"
+							>
+								{item.itemName}:
+								<br />
+							</Link>
+							<div className="item-price">
+								£{item.itemPrice}
+							</div>
+						</div>
+					))
+				) : (
+					<div>No items in this shop</div>
+				)}
+			</div>
 		</div>
 	);
 }
