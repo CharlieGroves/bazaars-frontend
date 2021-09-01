@@ -1,0 +1,8 @@
+.google-login-button-container {
+    position: relative;
+} 
+.google-login-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+} 

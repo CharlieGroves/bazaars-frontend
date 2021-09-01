@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../context/AuthenticationContext";
 import "../css/Loader.css";
-
+import "../css/Root.css";
+import GoogleButton from "react-google-button";
 
 import { googleProvider } from "../context/authMethods";
 import socialMediaAuth from "../socialMediaAuth";
@@ -21,8 +21,14 @@ export default function Root() {
 
 	return (
 		<div>
-			<button onClick={() => handleSignIn(googleProvider)}>Google</button>
-			{loading && <div className="loader" />}
+			{loading ? (
+				<div className="loader" />
+			) : (
+				<GoogleButton
+					className="google-login-button"
+					onClick={() => handleSignIn(googleProvider)}
+				/>
+			)}
 		</div>
 	);
 }

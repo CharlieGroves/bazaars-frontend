@@ -1,7 +1,6 @@
 import React from "react";
 import { firestore } from "../firebase";
 import {
-	useCollectionData,
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
 
