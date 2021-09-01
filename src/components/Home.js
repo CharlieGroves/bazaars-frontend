@@ -18,7 +18,7 @@ export default function Home() {
 	currentUser && (userRef = firestore.collection("users").doc(uid));
 	currentUser && (shopsRef = userRef.collection("shops"));
 	console.log(uid);
-	currentUser && console.log(currentUser.photoURL)
+	currentUser && console.log(currentUser.photoURL);
 	// currentUser && console.log(photoURL)
 	const [userData] = useDocumentData(userRef);
 	const [shops] = useCollectionData(shopsRef);
@@ -49,7 +49,10 @@ export default function Home() {
 				<div className="flex-grid-master">
 					{shops &&
 						shops.map((shop, index) => (
-							<Link to={`/seller/${currentUser.uid}/${shop.name}`} key={index}>
+							<Link
+								to={`/seller/${currentUser.uid}/${shop.name}`}
+								key={index}
+							>
 								<div>{shop.name}</div>
 								<div>{shop.description}</div>
 							</Link>
@@ -72,9 +75,7 @@ export default function Home() {
 									}
 								/>
 							</label>
-							<button type="submit">
-								Create
-							</button>
+							<button type="submit">Create</button>
 						</form>
 					</div>
 				)}
