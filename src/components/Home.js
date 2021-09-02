@@ -6,6 +6,7 @@ import {
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
+import "../css/Home.css";
 
 export default function Home() {
 	let uid;
@@ -45,18 +46,26 @@ export default function Home() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={currentUser.photoURL} alt="Google Profile" />
+				<img
+					className="google-profile-photo"
+					src={currentUser.photoURL}
+					alt="Google Profile"
+				/>
 				<div className="flex-grid-master">
-					{shops &&
-						shops.map((shop, index) => (
-							<Link
-								to={`/seller/${currentUser.uid}/${shop.name}`}
-								key={index}
-							>
-								<div>{shop.name}</div>
-								<div>{shop.description}</div>
-							</Link>
-						))}
+					Shops: &nbsp;
+					<ul className="shop-ul">
+						{shops &&
+							shops.map((shop, index) => (
+								<li className="shop-li" key={index}>
+									<Link
+										to={`/seller/${currentUser.uid}/${shop.name}`}
+									>
+										<div>{shop.name}</div>
+										<div>{shop.description}</div>
+									</Link>
+								</li>
+							))}
+					</ul>
 					<button onClick={newShopClickHandler}>
 						Make a new shop
 					</button>

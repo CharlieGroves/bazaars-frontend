@@ -7,12 +7,15 @@ import {
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 import "../css/Shop.css";
+import ReactDOM from "react-dom";
+import {paypal} from 'paypal-checkout';
 
 export default function Shop({
 	match: {
 		params: { seller, shop },
 	},
 }) {
+	const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
 	const shopRef = firestore
 		.collection("users")
 		.doc(seller)
@@ -44,6 +47,7 @@ export default function Shop({
 	currentUser && (uid = currentUser.uid);
 	return (
 		<div>
+			
 			{uid !== seller ? (
 				<div>
 					<div>Seller {seller}</div>

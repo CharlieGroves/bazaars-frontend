@@ -10,10 +10,11 @@
 }
 
 .item {
-    min-width: 20rem;
+	min-width: 20rem;
 	height: 16rem;
     border-radius: 0.25rem;
 	background-color: #6f6f6f;
+	margin-bottom: var(--item-margin)
 }
 
 .item-link {

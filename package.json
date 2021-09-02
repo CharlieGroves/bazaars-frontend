@@ -9,6 +9,7 @@
 		"dotenv": "^10.0.0",
 		"firebase": "^8.9.1",
 		"firebase-admin": "^9.11.0",
+		"paypal-checkout": "^4.0.331",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-firebase-hooks": "^3.0.4",
