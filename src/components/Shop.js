@@ -7,6 +7,7 @@ import {
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 import "../css/Shop.css";
+import "../css/Loader.css";
 import app from "../firebase";
 
 export default function Shop({
@@ -25,6 +26,9 @@ export default function Shop({
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [itemPrice, setItemPrice] = useState();
+	const [itemImageURL, setItemImageURL] = useState(null);
+	const [imageUploadLoading, setImageUploadLoading] = useState(false);
+	const [imageValue, setImageValue] = useState()
 	const { currentUser } = useAuth();
 	let uid = "no user";
 
@@ -37,19 +41,29 @@ export default function Shop({
 		await itemsRef.doc(itemName).set({
 			itemName: itemName,
 			itemPrice: itemPrice,
+			itemImageURL: itemImageURL,
 		});
 		setItemName("");
 		setItemPrice("");
+		setImageValue("");
 		console.log("new item handler function");
 	};
 
-	const onFileChange = (e) => {
+	const onFileChange = async (e) => {
+		setImageUploadLoading(true);
 		const file = e.target.files[0];
 		const storageRef = app.storage().ref();
 		const fileRef = storageRef.child(file.name);
-		fileRef.put(file).then(() => {
-			console.log("file uploaded", file.name);
-		});
+		await fileRef
+			.put(file)
+			.then(async () => {
+				setItemImageURL(await fileRef.getDownloadURL());
+				console.log(e.target.value)
+			})
+			.finally(() => {
+				setImageUploadLoading(false);
+			});
+		console.log(itemImageURL);
 	};
 
 	currentUser && (uid = currentUser.uid);
@@ -95,10 +109,15 @@ export default function Shop({
 									Item Price: &nbsp;
 									<input
 										type="file"
+										value={imageValue}
 										onChange={onFileChange}
 									/>
 								</label>
-								<button type="submit">Create</button>
+								{imageUploadLoading ? (
+									<div className="loader" />
+								) : (
+									<button type="submit">Create</button>
+								)}
 							</form>
 							<button onClick={creatingNewItemStateChange}>
 								Cancel
@@ -124,6 +143,7 @@ export default function Shop({
 								<br />
 							</Link>
 							<div className="item-price">£{item.itemPrice}</div>
+							<img alt={item.name} height="300px" src={item.itemImageURL} />
 						</div>
 					))
 				) : (
