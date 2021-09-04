@@ -7,15 +7,13 @@ import {
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 import "../css/Shop.css";
-import ReactDOM from "react-dom";
-import {paypal} from 'paypal-checkout';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function Shop({
 	match: {
 		params: { seller, shop },
 	},
 }) {
-	const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
 	const shopRef = firestore
 		.collection("users")
 		.doc(seller)

@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState } from "react";
+import PayPal from "./PayPal";
 
 export default function Item() {
-    return (
-        <div>
-            
-        </div>
-    )
+	const [checkout, setCheckout] = useState(false);
+	return (
+		<div>
+			{checkout ? (
+				<PayPal />
+			) : (
+				<button
+					onClick={() => {
+						setCheckout(true);
+					}}
+				>
+					Checkout
+				</button>
+			)}
+		</div>
+	);
 }
