@@ -7,7 +7,7 @@ import {
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 import "../css/Shop.css";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import app from "../firebase";
 
 export default function Shop({
 	match: {
@@ -42,10 +42,19 @@ export default function Shop({
 		setItemPrice("");
 		console.log("new item handler function");
 	};
+
+	const onFileChange = (e) => {
+		const file = e.target.files[0];
+		const storageRef = app.storage().ref();
+		const fileRef = storageRef.child(file.name);
+		fileRef.put(file).then(() => {
+			console.log("file uploaded", file.name);
+		});
+	};
+
 	currentUser && (uid = currentUser.uid);
 	return (
 		<div>
-			
 			{uid !== seller ? (
 				<div>
 					<div>Seller {seller}</div>
@@ -81,6 +90,14 @@ export default function Shop({
 										step="any"
 									/>
 								</label>
+								<br />
+								<label>
+									Item Price: &nbsp;
+									<input
+										type="file"
+										onChange={onFileChange}
+									/>
+								</label>
 								<button type="submit">Create</button>
 							</form>
 							<button onClick={creatingNewItemStateChange}>
@@ -106,9 +123,7 @@ export default function Shop({
 								{item.itemName}:
 								<br />
 							</Link>
-							<div className="item-price">
-								£{item.itemPrice}
-							</div>
+							<div className="item-price">£{item.itemPrice}</div>
 						</div>
 					))
 				) : (

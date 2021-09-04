@@ -47,7 +47,7 @@ export function AuthenticationProvider({ children }) {
 				url: uid,
 				shops: [],
 				admin: false,
-				photoURL: photoURL
+				photoURL: photoURL,
 			});
 		}
 	}, [currentUser]);

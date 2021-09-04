@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/storage";
 
 // Log into the firebase account so I have access to
 // auth and firestore
