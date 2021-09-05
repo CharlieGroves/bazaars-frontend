@@ -1,3 +1,6 @@
+:root {
+	--shop-margin: 1rem;
+}
 .google-profile-photo {
 	border-radius: 50%;
 	width: 25%;
@@ -16,8 +19,31 @@
 	}
 }
 
-.shop-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+.shops-container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.shops {
+	min-width: 20rem;
+	height: 16rem;
+	border-radius: 0.25rem;
+	background-color: #443f3f86;
+	margin-bottom: var(--shop-margin);
+}
+
+.shop-link {
+	text-decoration: none;
+	color: black;
+}
+
+.shop-name, .shop-description {
+	margin-left: var(--shop-margin);
+	margin-top: var(--shop-margin);
+	text-decoration: bold;
+}
+
+.shop-description {
 }
