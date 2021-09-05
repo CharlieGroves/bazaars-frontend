@@ -1,10 +1,10 @@
 :root {
-    --item-margin: 1rem;
+	--item-margin: 1rem;
 }
 
 .item-container {
 	display: flex;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: space-around;
 }
@@ -12,17 +12,17 @@
 .item {
 	min-width: 20rem;
 	height: 16rem;
-    border-radius: 0.25rem;
+	border-radius: 0.25rem;
 	background-color: #6f6f6f;
-	margin-bottom: var(--item-margin)
+	margin-bottom: var(--item-margin);
 }
 
 .item-link {
 	color: black;
-    margin-left: var(--item-margin);
+	margin-left: var(--item-margin);
 	text-decoration: none;
 }
 
 .item-price {
-    margin-left: var(--item-margin);
+	margin-left: var(--item-margin);
 }

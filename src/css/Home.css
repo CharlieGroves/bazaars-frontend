@@ -1,12 +1,21 @@
 :root {
-	--shop-margin: 1rem;
+	--comapny-accent-colour: rgba(79, 185, 255, 0.726);
+	--company-accent-colour-hover: rgba(79, 185, 255, 0.9);
+	--company-accent-colour-focus: rgba(79, 185, 255);
+	--text-margin: 1rem;
+	--bottom-box-margin: 1.5rem;
+	--bottom-box-padding: 4rem;
+	--flex-left-margin: 2rem;
+	--background-colour: #ffffff;
+	--drop-shadow-colour: #eeeeee;
+	--max-width: 30rem;
+	--title-font-size: 2rem;
 }
 .google-profile-photo {
 	border-radius: 50%;
-	width: 25%;
+	width: 10%;
 	margin-left: 3%;
 	margin-top: 3%;
-	/* margin-right: 15%; */
 	height: auto;
 }
 
@@ -19,19 +28,62 @@
 	}
 }
 
+.new-shop-button {
+	padding: .7rem 1.6rem;
+	background: var(--comapny-accent-colour);
+	border: none;
+	border-radius: 0.3rem;
+	box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
+	line-height: 1.6rem;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+.new-shop-button:hover {
+	background: var(--company-accent-colour-hover);
+}
+
+.new-shop-button:focus {
+	background: var(--company-accent-colour-focus);
+}
+
+.title-and-create-new-shop-container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: var(--bottom-box-margin)
+}
+
+.shop,
+.title-and-create-new-shop-container {
+	max-width: var(--max-width);
+}
+
+.shops-container,
+.title-and-create-new-shop-container {
+	margin-left: var(--flex-left-margin);
+}
+
+.shops-title {
+	font-size: var(--title-font-size);
+	line-height: 3.2rem;
+	font-weight: 600;
+}
+
 .shops-container {
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-around;
+	margin-left: var(--flex-left-margin);
 }
 
-.shops {
-	min-width: 20rem;
-	height: 16rem;
-	border-radius: 0.25rem;
-	background-color: #443f3f86;
-	margin-bottom: var(--shop-margin);
+.shop {
+	height: auto;
+	border-radius: 0.3rem;
+	background-color: var(--background-colour);
+	margin-bottom: var(--bottom-box-margin);
+	padding-bottom: var(--bottom-box-padding);
+	box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
 }
 
 .shop-link {
@@ -39,11 +91,9 @@
 	color: black;
 }
 
-.shop-name, .shop-description {
-	margin-left: var(--shop-margin);
-	margin-top: var(--shop-margin);
-	text-decoration: bold;
-}
-
+.shop-name,
 .shop-description {
+	margin-left: var(--text-margin);
+	margin-top: var(--text-margin);
+	text-decoration: bold;
 }

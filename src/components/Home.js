@@ -50,27 +50,32 @@ export default function Home() {
 				src={currentUser.photoURL}
 				alt="Google Profile"
 			/>
-			<div className="flex-grid-master">
-				Shops: &nbsp;
-				<div className="shops-container">
-					{shops &&
-						shops.map((shop, index) => (
-							<div className="shops" key={index}>
-								<Link
-									to={`/seller/${currentUser.uid}/${shop.name}`}
-									className="shop-link"
-								>
-									<div className="shop-name">
-										<b>{shop.name}</b>
-									</div>
-									<div className="shop-description">
-										{shop.description}
-									</div>
-								</Link>
-							</div>
-						))}
-				</div>
-				<button onClick={newShopClickHandler}>Make a new shop</button>
+			<div className="title-and-create-new-shop-container">
+				<div className="shops-title">Shops</div>
+				<button
+					className="new-shop-button"
+					onClick={newShopClickHandler}
+				>
+					Make new shop
+				</button>
+			</div>
+			<div className="shops-container">
+				{shops &&
+					shops.map((shop, index) => (
+						<div className="shop" key={index}>
+							<Link
+								to={`/seller/${currentUser.uid}/${shop.name}`}
+								className="shop-link"
+							>
+								<div className="shop-name">
+									<b>{shop.name}</b>
+								</div>
+								<div className="shop-description">
+									{shop.description}
+								</div>
+							</Link>
+						</div>
+					))}
 			</div>
 			{creatingNewShop && (
 				<div>
@@ -79,6 +84,7 @@ export default function Home() {
 						<label>
 							Shop Name: &nbsp;
 							<input
+								required
 								type="text"
 								value={shopName}
 								onChange={(e) => setShopName(e.target.value)}
@@ -88,6 +94,7 @@ export default function Home() {
 						<label>
 							Shop Name: &nbsp;
 							<input
+								required
 								type="text"
 								value={shopDescription}
 								onChange={(e) =>
