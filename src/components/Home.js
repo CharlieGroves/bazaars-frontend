@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "../css/Home.css";
 import "../css/Dropdown.css";
 import ArrowDown from "./icons/ArrowDown";
+import ArrowRight from "./icons/ArrowRight";
 
 export default function Home() {
 	let uid;
@@ -57,7 +58,7 @@ export default function Home() {
 		<div className="home-container">
 			<div className="menu-conatiner">
 				<div className="flex-space-between">
-					<div></div>
+					<div />
 					<button onClick={onDropdownClick} className="menu-trigger">
 						<img
 							className="google-profile-photo"
@@ -128,19 +129,24 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<div className="shop" key={index}>
-									<Link
-										to={`/seller/${currentUser.uid}/${shop.name}`}
-										className="shop-link"
-									>
-										<div className="shop-name">
-											<b>{shop.name}</b>
-										</div>
-										<div className="shop-description">
-											{shop.description}
-										</div>
-									</Link>
-								</div>
+								<React.Fragment>
+									<div className="shop" key={index}>
+										<Link
+											to={`/seller/${currentUser.uid}/${shop.name}`}
+											className="shop-link"
+										>
+											<div className="shop-name">
+												<b>{shop.name}</b>
+											</div>
+											<div className="shop-description">
+												{shop.description}
+											</div>
+										</Link>
+									</div>
+									<span>
+										<ArrowRight />
+									</span>
+								</React.Fragment>
 							))}
 					</div>
 				</div>

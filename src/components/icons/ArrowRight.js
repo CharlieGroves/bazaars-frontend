@@ -1,8 +1,9 @@
+import React from "react";
+
 export default function ArrowRight() {
 	return (
 		<svg
 			viewBox="0 0 20 20"
-			class="Polaris-Icon__Svg_375hu"
 			focusable="false"
 			aria-hidden="true"
 		>
