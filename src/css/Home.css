@@ -13,10 +13,10 @@
 }
 .google-profile-photo {
 	border-radius: 50%;
-	width: 10%;
-	margin-left: 3%;
-	margin-top: 3%;
-	height: auto;
+	margin: 2%;
+	/* width: 50%; */
+	height: 2rem;
+	flex: 1;
 }
 
 @media only screen and (max-width: 700px) {
@@ -28,8 +28,12 @@
 	}
 }
 
-.new-shop-button {
-	padding: .7rem 1.6rem;
+.home-container {
+	margin-left: var(--flex-left-margin);
+}
+
+.shop-button {
+	padding: 0.7rem 1.6rem;
 	background: var(--comapny-accent-colour);
 	border: none;
 	border-radius: 0.3rem;
@@ -37,30 +41,27 @@
 	line-height: 1.6rem;
 	font-size: 1.5rem;
 	cursor: pointer;
+	transition: box-shadow 0.4s ease;
 }
 
-.new-shop-button:hover {
+.shop-button:hover {
 	background: var(--company-accent-colour-hover);
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
-.new-shop-button:focus {
+.shop-button:focus {
 	background: var(--company-accent-colour-focus);
 }
 
 .title-and-create-new-shop-container {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: var(--bottom-box-margin)
+	margin-bottom: var(--bottom-box-margin);
 }
 
 .shop,
 .title-and-create-new-shop-container {
 	max-width: var(--max-width);
-}
-
-.shops-container,
-.title-and-create-new-shop-container {
-	margin-left: var(--flex-left-margin);
 }
 
 .shops-title {
@@ -74,7 +75,6 @@
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: space-around;
-	margin-left: var(--flex-left-margin);
 }
 
 .shop {

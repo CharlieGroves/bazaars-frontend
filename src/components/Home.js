@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
 import {
@@ -7,6 +7,8 @@ import {
 } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
 import "../css/Home.css";
+import "../css/Dropdown.css";
+import ArrowDown from "./icons/ArrowDown";
 
 export default function Home() {
 	let uid;
@@ -16,11 +18,15 @@ export default function Home() {
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
+	const [dropdownVisible, setDropdownVisible] = useState(false);
+	const dropdownRef = useRef(null);
 	const { currentUser, logout } = useAuth();
 
-	currentUser && (uid = currentUser.uid);
-	currentUser && (userRef = firestore.collection("users").doc(uid));
-	currentUser && (shopsRef = userRef.collection("shops"));
+	if (currentUser) {
+		currentUser && (uid = currentUser.uid);
+		currentUser && (userRef = firestore.collection("users").doc(uid));
+		currentUser && (shopsRef = userRef.collection("shops"));
+	}
 
 	const [userData] = useDocumentData(userRef);
 	const [shops] = useCollectionData(shopsRef);
@@ -34,23 +40,51 @@ export default function Home() {
 		setShopName("");
 	};
 
-	function newShopClickHandler() {
+	const newShopClickHandler = () => {
 		setCreatingNewShop(!creatingNewShop);
-	}
+	};
 
-	async function HandleLogout(e) {
+	const handleLogout = async (e) => {
 		e.preventDefault();
 		await logout();
-	}
+	};
+
+	const onDropdownClick = () => {
+		setDropdownVisible(!dropdownVisible);
+	};
 
 	return (
 		<div className="home-container">
-			<img
-				className="google-profile-photo"
-				src={currentUser.photoURL}
-				alt="Google Profile"
-			/>
-
+			<div className="menu-conatiner">
+				<div className="flex-space-between">
+					<div></div>
+					<button onClick={onDropdownClick} className="menu-trigger">
+						<img
+							className="google-profile-photo"
+							src={currentUser.photoURL}
+							alt="User Avatar"
+						/>
+						<span>
+							<ArrowDown />
+						</span>
+					</button>
+				</div>
+				<nav
+					ref={dropdownRef}
+					className={`menu ${
+						dropdownVisible ? "active" : "inactive"
+					}`}
+				>
+					<ul>
+						<li>
+							<a href="/manage">Manage Account</a>
+						</li>
+						<li>
+							<a onClick={handleLogout}>Log out</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 			{creatingNewShop ? (
 				<div>
 					<div>Creating new shop</div>
@@ -85,7 +119,7 @@ export default function Home() {
 					<div className="title-and-create-new-shop-container">
 						<div className="shops-title">Shops</div>
 						<button
-							className="new-shop-button"
+							className="shop-button"
 							onClick={newShopClickHandler}
 						>
 							Make new shop
@@ -112,7 +146,6 @@ export default function Home() {
 				</div>
 			)}
 			<br />
-			<button onClick={HandleLogout}>log out</button>
 		</div>
 	);
 }
