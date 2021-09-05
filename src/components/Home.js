@@ -35,7 +35,7 @@ export default function Home() {
 	};
 
 	function newShopClickHandler() {
-		setCreatingNewShop(true);
+		setCreatingNewShop(!creatingNewShop);
 	}
 
 	async function HandleLogout(e) {
@@ -50,34 +50,8 @@ export default function Home() {
 				src={currentUser.photoURL}
 				alt="Google Profile"
 			/>
-			<div className="title-and-create-new-shop-container">
-				<div className="shops-title">Shops</div>
-				<button
-					className="new-shop-button"
-					onClick={newShopClickHandler}
-				>
-					Make new shop
-				</button>
-			</div>
-			<div className="shops-container">
-				{shops &&
-					shops.map((shop, index) => (
-						<div className="shop" key={index}>
-							<Link
-								to={`/seller/${currentUser.uid}/${shop.name}`}
-								className="shop-link"
-							>
-								<div className="shop-name">
-									<b>{shop.name}</b>
-								</div>
-								<div className="shop-description">
-									{shop.description}
-								</div>
-							</Link>
-						</div>
-					))}
-			</div>
-			{creatingNewShop && (
+
+			{creatingNewShop ? (
 				<div>
 					<div>Creating new shop</div>
 					<form onSubmit={newShopHandler}>
@@ -104,6 +78,37 @@ export default function Home() {
 						</label>
 						<button type="submit">Create</button>
 					</form>
+					<button onClick={newShopClickHandler}>Cancel</button>
+				</div>
+			) : (
+				<div>
+					<div className="title-and-create-new-shop-container">
+						<div className="shops-title">Shops</div>
+						<button
+							className="new-shop-button"
+							onClick={newShopClickHandler}
+						>
+							Make new shop
+						</button>
+					</div>
+					<div className="shops-container">
+						{shops &&
+							shops.map((shop, index) => (
+								<div className="shop" key={index}>
+									<Link
+										to={`/seller/${currentUser.uid}/${shop.name}`}
+										className="shop-link"
+									>
+										<div className="shop-name">
+											<b>{shop.name}</b>
+										</div>
+										<div className="shop-description">
+											{shop.description}
+										</div>
+									</Link>
+								</div>
+							))}
+					</div>
 				</div>
 			)}
 			<br />
