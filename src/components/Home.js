@@ -58,8 +58,8 @@ export default function Home() {
 
 	return (
 		<div className="home-container">
-			<div className="menu-conatiner">
-				<div className="flex-space-between">
+			<div className="menu-container">
+				<div className="dropdown flex-space-between">
 					<div />
 					<button onClick={onDropdownClick} className="menu-trigger">
 						<img
@@ -72,21 +72,23 @@ export default function Home() {
 						</span>
 					</button>
 				</div>
-				<nav
-					ref={dropdownRef}
-					className={`menu ${
-						dropdownVisible ? "active" : "inactive"
-					}`}
-				>
-					<ul>
-						<li>
-							<a href="/manage">Manage Account</a>
-						</li>
-						<li>
-							<a onClick={handleLogout}>Log out</a>
-						</li>
-					</ul>
-				</nav>
+				<div className="dropdown-container">
+					<nav
+						ref={dropdownRef}
+						className={`menu ${
+							dropdownVisible ? "active" : "inactive"
+						}`}
+					>
+						<ul>
+							<li>
+								<a href="/manage">Manage Account</a>
+							</li>
+							<li>
+								<a onClick={handleLogout}>Log out</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 			{creatingNewShop ? (
 				<div>

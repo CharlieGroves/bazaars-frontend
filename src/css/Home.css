@@ -52,10 +52,12 @@
 }
 
 .shops-container {
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: space-around;
+	z-index: 0;
 }
 
 .shop {
