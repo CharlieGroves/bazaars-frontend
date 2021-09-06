@@ -3,11 +3,13 @@ import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
 import {
 	useCollectionData,
-	useDocumentData,
+	// useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
+
 import "../css/Home.css";
 import "../css/Dropdown.css";
+
 import ArrowDown from "./icons/ArrowDown";
 import ArrowRight from "./icons/ArrowRight";
 
@@ -29,7 +31,7 @@ export default function Home() {
 		currentUser && (shopsRef = userRef.collection("shops"));
 	}
 
-	const [userData] = useDocumentData(userRef);
+	// const [userData] = useDocumentData(userRef);
 	const [shops] = useCollectionData(shopsRef);
 
 	const newShopHandler = async (e) => {
@@ -129,8 +131,8 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<React.Fragment>
-									<div className="shop" key={index}>
+								<React.Fragment key={index}>
+									<div className="shop">
 										<Link
 											to={`/seller/${currentUser.uid}/${shop.name}`}
 											className="shop-link"
@@ -142,10 +144,10 @@ export default function Home() {
 												{shop.description}
 											</div>
 										</Link>
+										<div className="arrow-right-container">
+											<ArrowRight className="right-arrow" />
+										</div>
 									</div>
-									<span>
-										<ArrowRight />
-									</span>
 								</React.Fragment>
 							))}
 					</div>

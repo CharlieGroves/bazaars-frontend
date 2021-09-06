@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { firestore } from "../firebase";
 import {
 	useCollectionData,
-	//useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
+
+
+import app from "../firebase";
 import "../css/Shop.css";
 import "../css/Loader.css";
-import app from "../firebase";
 
 export default function Shop({
 	match: {
@@ -21,7 +22,6 @@ export default function Shop({
 		.collection("shops")
 		.doc(shop);
 	const itemsRef = shopRef.collection("items");
-	//const [shopData] = useDocumentData(shopRef);
 	const [itemsData] = useCollectionData(itemsRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");

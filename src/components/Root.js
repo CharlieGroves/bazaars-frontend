@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import GoogleButton from "react-google-button";
+
 import "../css/Loader.css";
 import "../css/Root.css";
-import GoogleButton from "react-google-button";
 
 import { googleProvider } from "../context/authMethods";
 import socialMediaAuth from "../socialMediaAuth";

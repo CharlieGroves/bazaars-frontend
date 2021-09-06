@@ -4,21 +4,32 @@
 	--company-accent-colour-focus: rgba(79, 185, 255);
 	--text-margin: 1rem;
 	--bottom-box-margin: 1.5rem;
-	--bottom-box-padding: 4rem;
+	--bottom-box-padding: 0.5rem;
+	--top-box-padding: 0.5rem;
 	--flex-left-margin: 2rem;
+	--flex-right-margin: 2rem;
 	--background-colour: #ffffff;
 	--drop-shadow-colour: #eeeeee;
 	--max-width: 30rem;
 	--title-font-size: 2rem;
 }
 
-
 @media only screen and (max-width: 700px) {
+	html {
+		min-width: 100%;
+	}
+}
 
+@media only screen and (min-width: 700px) {
+	.shop,
+	.title-and-create-new-shop-container {
+		max-width: var(--max-width);
+	}
 }
 
 .home-container {
 	margin-left: var(--flex-left-margin);
+	margin-right: var(--flex-right-margin);
 }
 
 .shop-button {
@@ -44,13 +55,9 @@
 
 .title-and-create-new-shop-container {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: var(--bottom-box-margin);
-}
-
-.shop,
-.title-and-create-new-shop-container {
-	max-width: var(--max-width);
 }
 
 .shops-title {
@@ -70,9 +77,15 @@
 	height: auto;
 	border-radius: 0.3rem;
 	position: relative;
+	display: flex;
+	flex-shrink: 0;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
 	background-color: var(--background-colour);
 	margin-bottom: var(--bottom-box-margin);
 	padding-bottom: var(--bottom-box-padding);
+	padding-top: var(--top-box-padding);
 	box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
 }
 
@@ -84,16 +97,18 @@
 .shop-name,
 .shop-description {
 	margin-left: var(--text-margin);
-	margin-top: var(--text-margin);
+	margin-right: var(--text-margin);
+	/* margin-top: var(--text-margin); */
 	text-decoration: bold;
 }
 
 .right-arrow {
-	right: 0;
-	height: 5rem;
+	right: 1rem;
 }
 
-.shop span {
-	height: 2rem;
-	width: 2rem;
+.arrow-right-container {
+	/* line-height: 3.2rem; */
+	text-align: center;
+	height: 20px;
+	width: 20px;
 }
