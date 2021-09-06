@@ -92,7 +92,7 @@ export default function Home() {
 				</div>
 			</div>
 			{creatingNewShop ? (
-				<div>
+				<div className="creating-new-shop-container">
 					<div>Creating new shop</div>
 					<form onSubmit={newShopHandler}>
 						<label>
