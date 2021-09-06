@@ -20,7 +20,7 @@ export default function Home() {
 
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
-	const [creatingNewShop, setCreatingNewShop] = useState(false);
+	const [creatingNewShop, setCreatingNewShop] = useState(true);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
 	const history = useHistory();
@@ -93,11 +93,12 @@ export default function Home() {
 			</div>
 			{creatingNewShop ? (
 				<div className="creating-new-shop-container">
-					<div>Creating new shop</div>
-					<form onSubmit={newShopHandler}>
-						<label>
-							Shop Name: &nbsp;
+					<div className="creating-new-shop-title title">Creating new shop</div>
+					<form className="creating-new-shop-form" onSubmit={newShopHandler}>
+						<label className="creating-new-shop-label">
+							<div className="title-smaller">Shop Name: &nbsp;</div>
 							<input
+								className="creating-new-shop-input"
 								required
 								type="text"
 								value={shopName}
@@ -105,10 +106,11 @@ export default function Home() {
 							/>
 						</label>
 						<br />
-						<label>
-							Shop Name: &nbsp;
+						<label className="creating-new-shop-label">
+							<div className="title-smaller">Shop Description: &nbsp;</div>
 							<input
 								required
+								className="creating-new-shop-input"
 								type="text"
 								value={shopDescription}
 								onChange={(e) =>
@@ -116,14 +118,16 @@ export default function Home() {
 								}
 							/>
 						</label>
-						<button type="submit">Create</button>
+						<br />
+						<button className="creating-new-shop-submit shop-button" type="submit">Create</button>
 					</form>
-					<button onClick={newShopClickHandler}>Cancel</button>
+					<br />
+					<button className="creating-new-shop-cancel cancel-button" onClick={newShopClickHandler}>Cancel</button>
 				</div>
 			) : (
 				<div>
 					<div className="title-and-create-new-shop-container">
-						<div className="shops-title">Shops</div>
+						<div className="title">Shops</div>
 						<button
 							className="shop-button"
 							onClick={newShopClickHandler}
@@ -134,7 +138,15 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<div className="shop-container" onClick={() => {history.push(`/seller/${currentUser.uid}/${shop.name}`)}} key={index}>
+								<div
+									className="shop-container"
+									onClick={() => {
+										history.push(
+											`/seller/${currentUser.uid}/${shop.name}`
+										);
+									}}
+									key={index}
+								>
 									<div className="shop">
 										<Link
 											to={`/seller/${currentUser.uid}/${shop.name}`}

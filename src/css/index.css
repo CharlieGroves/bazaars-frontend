@@ -1,7 +1,8 @@
 :root {
-	--comapny-accent-colour: rgba(79, 185, 255, 0.726);
+	--company-accent-colour: rgba(79, 185, 255, 0.726);
 	--company-accent-colour-hover: rgba(79, 185, 255, 0.9);
 	--company-accent-colour-focus: rgba(79, 185, 255);
+	--company-warning-colour: rgba(216, 13, 13, 0.74);
 	--text-margin: 1rem;
 	--bottom-box-margin: 1.5rem;
 	--bottom-box-padding: 0.5rem;
@@ -13,8 +14,8 @@
 	--max-width: 30rem;
 	--title-font-size: 2rem;
 	--item-margin: 1rem;
+	--standard-border-radius: 0.3rem;
 }
-
 
 body {
 	margin: 0;
@@ -25,8 +26,9 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+	height: 100%;
 }
 
 code {
