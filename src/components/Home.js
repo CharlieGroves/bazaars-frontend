@@ -6,7 +6,7 @@ import {
 	// useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router";
 import "../css/Home.css";
 import "../css/Dropdown.css";
 
@@ -23,6 +23,7 @@ export default function Home() {
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
+	const history = useHistory();
 	const { currentUser, logout } = useAuth();
 
 	if (currentUser) {
@@ -133,7 +134,7 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<React.Fragment key={index}>
+								<div className="shop-container" onClick={() => {history.push(`/seller/${currentUser.uid}/${shop.name}`)}} key={index}>
 									<div className="shop">
 										<Link
 											to={`/seller/${currentUser.uid}/${shop.name}`}
@@ -150,7 +151,7 @@ export default function Home() {
 											<ArrowRight className="right-arrow" />
 										</div>
 									</div>
-								</React.Fragment>
+								</div>
 							))}
 					</div>
 				</div>
