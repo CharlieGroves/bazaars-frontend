@@ -20,7 +20,7 @@ export default function Home() {
 
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
-	const [creatingNewShop, setCreatingNewShop] = useState(true);
+	const [creatingNewShop, setCreatingNewShop] = useState(false);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
 	const history = useHistory();
