@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import app from "../firebase";
 import "../css/Shop.css";
 import "../css/Loader.css";
+import "../css/Buttons.css";
 
 export default function Shop({
 	match: {
@@ -94,7 +95,7 @@ export default function Shop({
 								<label>
 									Item Price: &nbsp;
 									<input
-										required	
+										required
 										type="int"
 										value={itemPrice}
 										onChange={(e) =>
@@ -125,13 +126,12 @@ export default function Shop({
 							</button>
 						</div>
 					) : (
-						<button onClick={creatingNewItemStateChange}>
+						<button className="shop-button make-new-item-button" onClick={creatingNewItemStateChange}>
 							Make a new item
 						</button>
 					)}
 				</div>
 			)}
-			Items: <br />
 			<div className="item-container">
 				{itemsData ? (
 					itemsData.map((item, index) => (
