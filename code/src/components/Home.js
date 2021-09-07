@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import "../css/Home.css";
+import "../css/Buttons.css";
 import "../css/Dropdown.css";
 
 import ArrowDown from "./icons/ArrowDown";
@@ -67,7 +68,7 @@ export default function Home() {
 							className="google-profile-photo"
 							src={currentUser.photoURL}
 							alt="User Avatar"
-							referrerPolicy="no-referrer" 
+							referrerPolicy="no-referrer"
 						/>
 						<span>
 							<ArrowDown />
@@ -94,8 +95,13 @@ export default function Home() {
 			</div>
 			{creatingNewShop ? (
 				<div className="creating-new-shop-container">
-					<div className="creating-new-shop-title title">Creating new shop</div>
-					<form className="creating-new-shop-form" onSubmit={newShopHandler}>
+					<div className="creating-new-shop-title title">
+						Creating new shop
+					</div>
+					<form
+						className="creating-new-shop-form"
+						onSubmit={newShopHandler}
+					>
 						<label className="creating-new-shop-label shop-name-label">
 							<div className="title-smaller">Name: &nbsp;</div>
 							<input
@@ -108,7 +114,9 @@ export default function Home() {
 						</label>
 						<br />
 						<label className="creating-new-shop-label">
-							<div className="title-smaller">Description: &nbsp;</div>
+							<div className="title-smaller">
+								Description: &nbsp;
+							</div>
 							<input
 								required
 								className="creating-new-shop-input"
@@ -120,10 +128,20 @@ export default function Home() {
 							/>
 						</label>
 						<br />
-						<button className="creating-new-shop-submit shop-button" type="submit">Create</button>
+						<button
+							className="creating-new-shop-submit shop-button"
+							type="submit"
+						>
+							Create
+						</button>
 					</form>
 					<br />
-					<button className="creating-new-shop-cancel cancel-button" onClick={newShopClickHandler}>Cancel</button>
+					<button
+						className="creating-new-shop-cancel cancel-button"
+						onClick={newShopClickHandler}
+					>
+						Cancel
+					</button>
 				</div>
 			) : (
 				<div>
@@ -139,16 +157,15 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<div
-									className="shop-container"
-									onClick={() => {
-										history.push(
-											`/seller/${currentUser.uid}/${shop.name}`
-										);
-									}}
-									key={index}
-								>
-									<div className="shop">
+								<div className="shop-container" key={index}>
+									<div
+										className="shop"
+										onClick={() => {
+											history.push(
+												`/seller/${currentUser.uid}/${shop.name}`
+											);
+										}}
+									>
 										<Link
 											to={`/seller/${currentUser.uid}/${shop.name}`}
 											className="shop-link"
