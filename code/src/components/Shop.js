@@ -82,6 +82,7 @@ export default function Shop({
 								<label>
 									Item Name: &nbsp;
 									<input
+										required
 										type="text"
 										value={itemName}
 										onChange={(e) =>
@@ -93,6 +94,7 @@ export default function Shop({
 								<label>
 									Item Price: &nbsp;
 									<input
+										required	
 										type="int"
 										value={itemPrice}
 										onChange={(e) =>
@@ -106,6 +108,7 @@ export default function Shop({
 								<label>
 									Item Price: &nbsp;
 									<input
+										required
 										type="file"
 										value={imageValue}
 										onChange={onFileChange}
