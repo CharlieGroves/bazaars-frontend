@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import {
-	useCollectionData,
-} from "react-firebase-hooks/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
-
 
 import app from "../firebase";
 import "../css/Shop.css";
@@ -28,7 +25,7 @@ export default function Shop({
 	const [itemPrice, setItemPrice] = useState();
 	const [itemImageURL, setItemImageURL] = useState(null);
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
-	const [imageValue, setImageValue] = useState()
+	const [imageValue, setImageValue] = useState();
 	const { currentUser } = useAuth();
 	let uid = "no user";
 
@@ -38,6 +35,7 @@ export default function Shop({
 
 	const newItemHandler = async (e) => {
 		e.preventDefault();
+		setItemPrice(parseInt(itemPrice));
 		await itemsRef.doc(itemName).set({
 			itemName: itemName,
 			itemPrice: itemPrice,
@@ -58,7 +56,7 @@ export default function Shop({
 			.put(file)
 			.then(async () => {
 				setItemImageURL(await fileRef.getDownloadURL());
-				console.log(e.target.value)
+				console.log(e.target.value);
 			})
 			.finally(() => {
 				setImageUploadLoading(false);
@@ -136,14 +134,18 @@ export default function Shop({
 					itemsData.map((item, index) => (
 						<div className="item" key={index}>
 							<Link
-								to={`/seller/${currentUser.uid}/${shop}/${item.name}`}
+								to={`/seller/${currentUser.uid}/${shop}/${item.itemName}`}
 								className="item-link"
 							>
 								{item.itemName}:
 								<br />
 							</Link>
 							<div className="item-price">£{item.itemPrice}</div>
-							<img alt={item.name} height="300px" src={item.itemImageURL} />
+							<img
+								alt={item.name}
+								height="300px"
+								src={item.itemImageURL}
+							/>
 						</div>
 					))
 				) : (
