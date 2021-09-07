@@ -67,6 +67,7 @@ export default function Home() {
 							className="google-profile-photo"
 							src={currentUser.photoURL}
 							alt="User Avatar"
+							referrerPolicy="no-referrer" 
 						/>
 						<span>
 							<ArrowDown />
@@ -95,8 +96,8 @@ export default function Home() {
 				<div className="creating-new-shop-container">
 					<div className="creating-new-shop-title title">Creating new shop</div>
 					<form className="creating-new-shop-form" onSubmit={newShopHandler}>
-						<label className="creating-new-shop-label">
-							<div className="title-smaller">Shop Name: &nbsp;</div>
+						<label className="creating-new-shop-label shop-name-label">
+							<div className="title-smaller">Name: &nbsp;</div>
 							<input
 								className="creating-new-shop-input"
 								required
@@ -107,7 +108,7 @@ export default function Home() {
 						</label>
 						<br />
 						<label className="creating-new-shop-label">
-							<div className="title-smaller">Shop Description: &nbsp;</div>
+							<div className="title-smaller">Description: &nbsp;</div>
 							<input
 								required
 								className="creating-new-shop-input"

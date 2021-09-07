@@ -1,43 +1,20 @@
 {
-	"name": "component-3",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.8.3",
-		"dotenv": "^10.0.0",
-		"firebase": "^8.9.1",
-		"firebase-admin": "^9.11.0",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-firebase-hooks": "^3.0.4",
-		"react-google-button": "^0.7.2",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "^1.1.5",
-		"web-vitals": "^1.1.2"
-	},
-	"scripts": {
-		"start": "CHOKIDAR_USEPOLLING=true react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "component-3",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000c\u0000o\u0000m\u0000p\u0000o\u0000n\u0000e\u0000n\u0000t\u0000-\u00003\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlieGroves/component-3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CharlieGroves/component-3/issues"
+  },
+  "homepage": "https://github.com/CharlieGroves/component-3#readme"
 }

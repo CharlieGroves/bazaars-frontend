@@ -1,0 +1,100 @@
+.menu-container {
+	position: relative;
+	height: 4rem; 
+}
+
+.google-profile-photo {
+	border-radius: 50%;
+	margin: 2%;
+	height: 2rem;
+	flex: 1;
+}
+
+.menu-trigger {
+	display: flex;
+	width: auto;
+	background: white;
+	border-radius: 0.3rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	padding: 4px 6px;
+	box-shadow: 8px 16px 5rem #eeeeee;
+	vertical-align: middle;
+	transition: box-shadow 0.4s ease;
+	margin-top: 1rem;
+	border: none;
+	justify-content: center;
+}
+
+.menu-trigger:hover {
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-trigger span {
+	width: 2rem;
+	height: 2rem;
+}
+
+.menu {
+	background: #ffffff;
+	border-radius: 8px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-20px);
+	transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.menu.active {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	position: absolute;
+	z-index: 2;
+}
+
+.menu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu li {
+	border-bottom: 1px solid #dddddd;
+	cursor: pointer;
+}
+
+.menu li a {
+	text-decoration: none;
+	color: #333333;
+	padding: 15px 20px;
+	display: block;
+}
+
+.flex-space-between {
+	margin-bottom: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.creating-new-shop-container {
+	position: relative;
+	z-index: 1;
+}
