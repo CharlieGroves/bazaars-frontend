@@ -21,7 +21,7 @@ export default function Home() {
 
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
-	const [creatingNewShop, setCreatingNewShop] = useState(false);
+	const [creatingNewShop, setCreatingNewShop] = useState(true);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
 	const history = useHistory();
@@ -98,28 +98,26 @@ export default function Home() {
 					<div className="creating-new-shop-title title">
 						Creating new shop
 					</div>
-					<form
-						className="creating-new-shop-form"
-						onSubmit={newShopHandler}
-					>
-						<label className="creating-new-shop-label shop-name-label">
+					<form onSubmit={newShopHandler}>
+						<label className="form-label">
 							<div className="title-smaller">Name: &nbsp;</div>
 							<input
-								className="creating-new-shop-input"
+								className="input"
 								required
 								type="text"
 								value={shopName}
 								onChange={(e) => setShopName(e.target.value)}
 							/>
 						</label>
+
 						<br />
-						<label className="creating-new-shop-label">
-							<div className="title-smaller">
+						<label className="form-label">
+							<div className="title-smaller flex-1">
 								Description: &nbsp;
 							</div>
 							<input
 								required
-								className="creating-new-shop-input"
+								className="input"
 								type="text"
 								value={shopDescription}
 								onChange={(e) =>

@@ -26,6 +26,7 @@
 
 .creating-new-shop-label {
 	display: flex;
+	justify-content: space-between;
 }
 
 .creating-new-shop-input {
