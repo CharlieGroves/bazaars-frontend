@@ -22,16 +22,18 @@ export default function ManageAccount() {
 		<div className="manage-account-container">
 			<div className="title">Manage Account:</div>
 			<form onSubmit={updateAccount} className="update-account-form">
-			<label className="form-label shop-name-label">
-							<div className="title-smaller">Name: &nbsp;</div>
-							<input
-								className="form-input"
-								required
-								type="text"
-								// value={shopName}
-								// onChange={(e) => setShopName(e.target.value)}
-							/>
-						</label>
+				<label className="form-label shop-name-label">
+					<div className="title-smaller">Name: &nbsp;</div>
+					<input className="input" required type="text" />
+				</label>
+				<label className="form-label shop-name-label">
+					<div className="title-smaller">Name: &nbsp;</div>
+					<input className="input" required type="text" />
+				</label>
+				<label className="form-label shop-name-label">
+					<div className="title-smaller">Name: &nbsp;</div>
+					<input className="input" required type="text" />
+				</label>
 				<button type="submit" className="shop-button">
 					Update
 				</button>
