@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Shop from "./components/Shop";
 import Seller from "./components/Seller";
 import Item from "./components/Item";
+import ManageAccount from "./components/ManageAccount";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					/>
 					<Route path="/seller/:seller/:shop" component={Shop} />
 					<Route path="/seller/:seller" component={Seller} />
+					<Route path="/manage-account" component={ManageAccount} />
 				</Switch>
 			</AuthenticationProvider>
 		</Router>

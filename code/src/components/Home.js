@@ -84,7 +84,7 @@ export default function Home() {
 					>
 						<ul>
 							<li>
-								<a href="/manage">Manage Account</a>
+								<a href="/manage-account">Manage Account</a>
 							</li>
 							<li>
 								<a onClick={handleLogout}>Log out</a>
