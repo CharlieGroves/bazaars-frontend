@@ -24,7 +24,7 @@ function App() {
 					/>
 					<Route path="/seller/:seller/:shop" component={Shop} />
 					<Route path="/seller/:seller" component={Seller} />
-					<Route path="/manage-account" component={ManageAccount} />
+					<PrivateRoute path="/manage-account" component={ManageAccount} />
 				</Switch>
 			</AuthenticationProvider>
 		</Router>
