@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import app from "../firebase";
 import "../css/Shop.css";
 import "../css/Loader.css";
+import "../css/Form.css";
 import "../css/Buttons.css";
 
 export default function Shop({

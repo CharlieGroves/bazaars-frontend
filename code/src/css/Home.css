@@ -24,23 +24,9 @@
 	margin-bottom: var(--bottom-box-margin);
 }
 
-.title, .title-smaller {
-	font-size: var(--title-font-size);
-}
-
-.title {
-	font-weight: 600;
-	line-height: 3.2rem;
-}
-
-.title-smaller {
-	word-wrap: break-word;
-	font-weight: 200;
-	line-height: 1rem;
-}
-
 .creating-new-shop-label {
 	display: flex;
+	justify-content: space-between;
 }
 
 .creating-new-shop-input {
@@ -94,7 +80,6 @@
 }
 
 .arrow-right-container {
-	/* line-height: 3.2rem; */
 	text-align: center;
 	height: 20px;
 	width: 20px;
