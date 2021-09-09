@@ -1,12 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 import ArrowRight from "./icons/ArrowRight";
 
 export default function ShopListItem(props) {
-	const { shop, index, currentUser } = props;
-	const history = useHistory;
+	const { shop, index, currentUser, history } = props;
 	return (
 		<div className="shop-container" key={index}>
 			<div

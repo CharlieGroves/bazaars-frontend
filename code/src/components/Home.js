@@ -9,8 +9,9 @@ import "../css/Buttons.css";
 import "../css/Dropdown.css";
 
 import ArrowDown from "./icons/ArrowDown";
-
 import ShopListItem from "./ShopListItem";
+import NewShopLabel from "./NewShopLabel";
+import DefaultButton from "./DefaultButton";
 
 export default function Home() {
 	let uid;
@@ -40,6 +41,8 @@ export default function Home() {
 			description: shopDescription,
 		});
 		setShopName("");
+		setShopDescription("")
+		newShopClickHandler();
 	};
 
 	const newShopClickHandler = () => {
@@ -99,32 +102,18 @@ export default function Home() {
 						className="creating-new-shop-form"
 						onSubmit={newShopHandler}
 					>
-						<label className="creating-new-shop-label shop-name-label">
-							<div className="title-smaller">Name: &nbsp;</div>
-							<input
-								className="creating-new-shop-input"
-								required
-								type="text"
-								value={shopName}
-								onChange={(e) => setShopName(e.target.value)}
-							/>
-						</label>
-						<br />
-						<label className="creating-new-shop-label">
-							<div className="title-smaller">
-								Description: &nbsp;
-							</div>
-							<input
-								required
-								className="creating-new-shop-input"
-								type="text"
-								value={shopDescription}
-								onChange={(e) =>
-									setShopDescription(e.target.value)
-								}
-							/>
-						</label>
-						<br />
+						<NewShopLabel
+							stateValue={shopName}
+							setStateValue={setShopName}
+							subTitle="Name"
+							type="text"
+						/>
+						<NewShopLabel
+							stateValue={shopDescription}
+							setStateValue={setShopDescription}
+							subTitle="Description"
+							type="text"
+						/>
 						<button
 							className="creating-new-shop-submit shop-button"
 							type="submit"
@@ -144,19 +133,16 @@ export default function Home() {
 				<div>
 					<div className="title-and-create-new-shop-container">
 						<div className="title">Shops</div>
-						<button
-							className="shop-button"
-							onClick={newShopClickHandler}
-						>
-							Make new shop
-						</button>
+						<DefaultButton text="make new shop" childClassName="shop-button"
+							childOnClick={newShopClickHandler}/>
 					</div>
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
 								<ShopListItem
+									key={index}
 									shop={shop}
-									index={index}
+									history={history}
 									currentUser={currentUser}
 								/>
 							))}
