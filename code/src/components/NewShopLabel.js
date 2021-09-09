@@ -1,13 +1,13 @@
 import React from "react";
 
 export default function NewShopLabel(props) {
-    const {stateValue, setStateValue, subTitle, type} = props
+    const {stateValue, setStateValue, subTitle, type, childClassName} = props
 	return (
 		<div>
-			<label className="creating-new-shop-label shop-name-label">
+			<label className="form-label">
 				<div className="title-smaller">{subTitle}: &nbsp;</div>
 				<input
-					className="creating-new-shop-input"
+					className="input"
 					required
 					type={type}
 					value={stateValue}

@@ -99,10 +99,11 @@ export default function Home() {
 						Creating new shop
 					</div>
 					<form
-						className="creating-new-shop-form"
+						// className="creating-new-shop-form"
 						onSubmit={newShopHandler}
 					>
 						<NewShopLabel
+							childClassName="form-label"
 							stateValue={shopName}
 							setStateValue={setShopName}
 							subTitle="Name"
