@@ -1,18 +1,16 @@
 import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
-import {
-	useCollectionData,
-	// useDocumentData,
-} from "react-firebase-hooks/firestore";
-import { Link } from "react-router-dom";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
 import { useHistory } from "react-router";
 import "../css/Home.css";
 import "../css/Buttons.css";
 import "../css/Dropdown.css";
 
 import ArrowDown from "./icons/ArrowDown";
-import ArrowRight from "./icons/ArrowRight";
+
+import ShopListItem from "./ShopListItem";
 
 export default function Home() {
 	let uid;
@@ -33,7 +31,6 @@ export default function Home() {
 		currentUser && (shopsRef = userRef.collection("shops"));
 	}
 
-	// const [userData] = useDocumentData(userRef);
 	const [shops] = useCollectionData(shopsRef);
 
 	const newShopHandler = async (e) => {
@@ -157,31 +154,11 @@ export default function Home() {
 					<div className="shops-container">
 						{shops &&
 							shops.map((shop, index) => (
-								<div className="shop-container" key={index}>
-									<div
-										className="shop"
-										onClick={() => {
-											history.push(
-												`/seller/${currentUser.uid}/${shop.name}`
-											);
-										}}
-									>
-										<Link
-											to={`/seller/${currentUser.uid}/${shop.name}`}
-											className="shop-link"
-										>
-											<div className="shop-name">
-												<b>{shop.name}</b>
-											</div>
-											<div className="shop-description">
-												{shop.description}
-											</div>
-										</Link>
-										<div className="arrow-right-container">
-											<ArrowRight className="right-arrow" />
-										</div>
-									</div>
-								</div>
+								<ShopListItem
+									shop={shop}
+									index={index}
+									currentUser={currentUser}
+								/>
 							))}
 					</div>
 				</div>
