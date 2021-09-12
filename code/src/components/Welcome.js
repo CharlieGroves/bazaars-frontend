@@ -36,15 +36,25 @@ export default function Welcome() {
 				</div>
 			</div>
 			<div className="welcome-body-container">
-				<div className="welcome-body-main-section-container pl-2 pr-2 ml-2 mr-2">
-					<div className="welcome-body-main-section-heading pt-4">
+				<div className="welcome-body-main-section-container pl-2 pr-2 ml-2 mr-2 pt-2 pb-2">
+					<div className="welcome-body-main-section-heading">
 						Are you a small business owner, or want to take more
 						control of your ecommerce website?
 					</div>
 					<br />
 					<div>
-						Create an online business with <i>App Name TBD</i>&nbsp;
+						Create an online business with <i>App Name TBD </i>
 						anytime, anywhere on any device.
+					</div>
+				</div>
+				<div className="welcome-body-second-section-container pl-2 pr-2 ml-2 mr-2 pt-2 pb-2">
+					<div className="welcome-body-second-section-heading">
+						Do you only want to be charged once you start making
+						money?
+					</div>
+					<br />
+					<div>
+						<i>App Name TBD</i> is the software for you.
 					</div>
 				</div>
 			</div>

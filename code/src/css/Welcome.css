@@ -8,12 +8,12 @@
 	margin-right: var(--header-margin);
 }
 
-.welcome-body-main-section-container {
+.welcome-body-main-section-container, .welcome-body-second-section-container {
 	margin-top: var(--section-margin);
     box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
     border-radius: var(--standard-border-radius);
 }
 
-.welcome-body-main-section-heading {
-    font-size: 1.5rem;
+.welcome-body-main-section-heading, .welcome-body-second-section-heading {
+    font-size: 1.25rem;
 }
