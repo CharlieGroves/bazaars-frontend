@@ -20,7 +20,7 @@ export default function Welcome() {
 		<div className="welcome-container">
 			<div className="welcome-header">
 				<div className="welcome-header-app-name title">App Name TBD</div>
-				<div className="welcome-container-sign-in">
+				<div className="welcome-header-sign-in">
 					<SignInWithGoogleButton
 						loading={loading}
 						setLoading={setLoading}
