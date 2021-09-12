@@ -17,17 +17,19 @@ export default function Welcome() {
 	const [loading, setLoading] = useState(false);
 	return (
 		<div className="welcome-container">
-            <div className="welcome-header">
-
-            </div>
-			<SignInWithGoogleButton
-				loading={loading}
-				setLoading={setLoading}
-				socialMediaAuth={socialMediaAuth}
-				history={history}
-				GoogleButton={GoogleButton}
-				googleProvider={googleProvider}
-			/>
+			<div className="welcome-header">
+				<div className="welcome-header-app-name">App Name TBD</div>
+				<div className="welcome-container-sign-in">
+					<SignInWithGoogleButton
+						loading={loading}
+						setLoading={setLoading}
+						socialMediaAuth={socialMediaAuth}
+						history={history}
+						GoogleButton={GoogleButton}
+						googleProvider={googleProvider}
+					/>
+				</div>
+			</div>
 			<Link to="signin">Sign In </Link>
 			Welcome
 		</div>
