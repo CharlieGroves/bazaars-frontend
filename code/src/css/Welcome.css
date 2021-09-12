@@ -3,7 +3,7 @@
 	justify-content: space-between;
 }
 
-.welcome-container-sign-in {
+.welcome-header-sign-in {
     margin-top: var(--header-margin);
     margin-right: var(--header-margin);
 }
