@@ -11,6 +11,7 @@ import "../css/Buttons.css";
 import "../css/Loader.css";
 import "../css/SignIn.css";
 import "../css/Welcome.css";
+import "../css/Titles.css";
 
 export default function Welcome() {
 	const history = useHistory();
@@ -18,7 +19,7 @@ export default function Welcome() {
 	return (
 		<div className="welcome-container">
 			<div className="welcome-header">
-				<div className="welcome-header-app-name">App Name TBD</div>
+				<div className="welcome-header-app-name title">App Name TBD</div>
 				<div className="welcome-container-sign-in">
 					<SignInWithGoogleButton
 						loading={loading}
