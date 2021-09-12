@@ -3,12 +3,12 @@ import { useHistory } from "react-router";
 import GoogleButton from "react-google-button";
 
 import "../css/Loader.css";
-import "../css/Root.css";
+import "../css/SignIn.css";
 
 import { googleProvider } from "../context/authMethods";
 import socialMediaAuth from "../socialMediaAuth";
 
-export default function Root() {
+export default function SignIn() {
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
 

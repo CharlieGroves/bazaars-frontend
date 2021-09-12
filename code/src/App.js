@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 
 import Home from "./components/Home";
-import Root from "./components/Root";
+import SignIn from "./components/SignIn";
 import PrivateRoute from "./components/PrivateRoute";
 import Shop from "./components/Shop";
 import Seller from "./components/Seller";
 import Item from "./components/Item";
 import ManageAccount from "./components/ManageAccount";
+import Welcome from "./components/Welcome";
 
 function App() {
 	return (
@@ -17,7 +18,8 @@ function App() {
 			<AuthenticationProvider>
 				<Switch>
 					<PrivateRoute path="/home" component={Home} />
-					<Route exact path="/" component={Root} />
+					<Route path ="/" component={Welcome} />
+					<Route exact path="/signin" component={SignIn} />
 					<Route
 						path="/seller/:seller/:shop/:item"
 						component={Item}
