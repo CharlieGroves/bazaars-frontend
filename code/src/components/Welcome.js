@@ -38,12 +38,12 @@ export default function Welcome() {
 			<div className="welcome-body-container">
 				<div className="welcome-body-main-section-container pl-2 pr-2 ml-2 mr-2">
 					<div className="welcome-body-main-section-heading pt-4">
-						Are you a small buisness owner, or want to take more
+						Are you a small business owner, or want to take more
 						control of your ecommerce website?
 					</div>
 					<br />
 					<div>
-						Create an online buisness with <i>App Name TBD</i>&nbsp;
+						Create an online business with <i>App Name TBD</i>&nbsp;
 						anytime, anywhere on any device.
 					</div>
 				</div>
