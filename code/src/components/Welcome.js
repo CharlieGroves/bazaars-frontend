@@ -30,7 +30,7 @@ export default function Welcome() {
 					/>
 				</div>
 			</div>
-			<Link to="signin">Sign In </Link>
+			<Link to="/signin">Sign In </Link>
 			Welcome
 		</div>
 	);
