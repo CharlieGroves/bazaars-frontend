@@ -17,9 +17,9 @@ function App() {
 		<Router>
 			<AuthenticationProvider>
 				<Switch>
+					<PrivateRoute path="/home" component={Home} />
 					<Route path="/signin" component={SignIn} />
 					<Route path ="/" component={Welcome} />
-					<PrivateRoute path="/home" component={Home} />
 					<Route
 						path="/seller/:seller/:shop/:item"
 						component={Item}

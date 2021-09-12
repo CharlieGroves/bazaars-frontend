@@ -3,7 +3,7 @@
 	--company-accent-colour-hover: rgba(79, 185, 255, 0.9);
 	--company-accent-colour-focus: rgba(79, 185, 255);
 	--company-warning-colour: rgba(216, 13, 13, 0.74);
-	--company-off-white: #f5f5f5;
+	--company-off-white: #f8f8f8;
 	--text-margin: 1rem;
 	--bottom-box-margin: 1.5rem;
 	--top-box-margin: 1.5rem;
@@ -17,7 +17,7 @@
 	--title-font-size: 2rem;
 	--item-margin: 1rem;
 	--standard-border-radius: 0.3rem;
-	--header-margin: 0.2rem;
+	--header-margin: 0.25rem;
 	--section-margin: 1rem;
 }
 

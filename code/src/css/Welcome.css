@@ -14,5 +14,5 @@
 }
 
 .welcome-body-main-section-heading {
-	margin-left: var(--text-margin);
+    font-size: 1.5rem;
 }

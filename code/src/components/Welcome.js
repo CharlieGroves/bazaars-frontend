@@ -21,7 +21,7 @@ export default function Welcome() {
 	return (
 		<div className="welcome-container">
 			<div className="welcome-header">
-				<div className="welcome-header-app-name title">
+				<div className="welcome-header-app-name title ml-1">
 					App Name TBD
 				</div>
 				<div className="welcome-header-sign-in">
@@ -36,13 +36,13 @@ export default function Welcome() {
 				</div>
 			</div>
 			<div className="welcome-body-container">
-				<div className="welcome-body-main-section-container">
-					<div className="welcome-body-main-section-heading pt-8 title-smaller">
+				<div className="welcome-body-main-section-container pl-2 pr-2 ml-1 mr-1">
+					<div className="welcome-body-main-section-heading pt-4">
 						Are you a small buisness owner, or want to take more
 						control of your ecommerce website?
 					</div>
 					<br />
-					<div>test</div>
+					<div>Create an online buisness with <i>App Name TBD</i> anytime, anywhere on any device</div>
 				</div>
 			</div>
 		</div>
