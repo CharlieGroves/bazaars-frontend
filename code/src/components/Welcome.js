@@ -10,13 +10,16 @@ import SignInWithGoogleButton from "./SignInWithGoogleButton";
 import "../css/Buttons.css";
 import "../css/Loader.css";
 import "../css/SignIn.css";
+import "../css/Welcome.css";
 
 export default function Welcome() {
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
 	return (
 		<div className="welcome-container">
-            
+            <div className="welcome-header">
+
+            </div>
 			<SignInWithGoogleButton
 				loading={loading}
 				setLoading={setLoading}
