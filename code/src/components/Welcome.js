@@ -42,7 +42,10 @@ export default function Welcome() {
 						control of your ecommerce website?
 					</div>
 					<br />
-					<div>Create an online buisness with <i>App Name TBD</i> anytime, anywhere on any device</div>
+					<div>
+						Create an online buisness with <i>App Name TBD</i>&nbsp;
+						anytime, anywhere on any device.
+					</div>
 				</div>
 			</div>
 		</div>
