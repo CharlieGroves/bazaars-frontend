@@ -19,7 +19,9 @@ export default function Welcome() {
 	return (
 		<div className="welcome-container">
 			<div className="welcome-header">
-				<div className="welcome-header-app-name title">App Name TBD</div>
+				<div className="welcome-header-app-name title">
+					App Name TBD
+				</div>
 				<div className="welcome-header-sign-in">
 					<SignInWithGoogleButton
 						loading={loading}
@@ -31,8 +33,9 @@ export default function Welcome() {
 					/>
 				</div>
 			</div>
-			<Link to="/signin">Sign In </Link>
-			Welcome
+            <div className="welcome-body-container">
+			    Welcome
+            </div>
 		</div>
 	);
 }
