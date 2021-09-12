@@ -4,6 +4,15 @@
 }
 
 .welcome-header-sign-in {
-    margin-top: var(--header-margin);
-    margin-right: var(--header-margin);
+	margin-top: var(--header-margin);
+	margin-right: var(--header-margin);
+}
+
+.welcome-body-main-section-container {
+	margin-top: var(--section-margin);
+    background-color: var(--company-off-white);
+}
+
+.welcome-body-main-section-heading {
+	margin-left: var(--text-margin);
 }

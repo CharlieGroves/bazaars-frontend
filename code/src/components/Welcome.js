@@ -12,6 +12,8 @@ import "../css/Loader.css";
 import "../css/SignIn.css";
 import "../css/Welcome.css";
 import "../css/Titles.css";
+import "../css/Margins.css";
+import "../css/Paddings.css";
 
 export default function Welcome() {
 	const history = useHistory();
@@ -34,9 +36,13 @@ export default function Welcome() {
 				</div>
 			</div>
 			<div className="welcome-body-container">
-				<div className="welcome-body-heading">
-					Are you a small buisness owner, or want to take more control
-					of your ecommerce website?
+				<div className="welcome-body-main-section-container">
+					<div className="welcome-body-main-section-heading pt-8 title-smaller">
+						Are you a small buisness owner, or want to take more
+						control of your ecommerce website?
+					</div>
+					<br />
+					<div>test</div>
 				</div>
 			</div>
 		</div>
