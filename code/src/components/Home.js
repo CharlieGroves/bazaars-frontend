@@ -41,7 +41,7 @@ export default function Home() {
 			description: shopDescription,
 		});
 		setShopName("");
-		setShopDescription("")
+		setShopDescription("");
 		newShopClickHandler();
 	};
 
@@ -134,8 +134,11 @@ export default function Home() {
 				<div>
 					<div className="title-and-create-new-shop-container">
 						<div className="title">Shops</div>
-						<DefaultButton text="make new shop" childClassName="shop-button"
-							childOnClick={newShopClickHandler}/>
+						<DefaultButton
+							text="make new shop"
+							childClassName="shop-button"
+							childOnClick={newShopClickHandler}
+						/>
 					</div>
 					<div className="shops-container">
 						{shops &&

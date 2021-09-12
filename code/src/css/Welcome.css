@@ -10,7 +10,8 @@
 
 .welcome-body-main-section-container {
 	margin-top: var(--section-margin);
-    background-color: var(--company-off-white);
+    box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
+    border-radius: var(--standard-border-radius);
 }
 
 .welcome-body-main-section-heading {

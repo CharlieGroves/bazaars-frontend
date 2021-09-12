@@ -36,7 +36,7 @@ export default function Welcome() {
 				</div>
 			</div>
 			<div className="welcome-body-container">
-				<div className="welcome-body-main-section-container pl-2 pr-2 ml-1 mr-1">
+				<div className="welcome-body-main-section-container pl-2 pr-2 ml-2 mr-2">
 					<div className="welcome-body-main-section-heading pt-4">
 						Are you a small buisness owner, or want to take more
 						control of your ecommerce website?
