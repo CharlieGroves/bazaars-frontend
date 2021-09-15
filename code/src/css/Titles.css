@@ -1,0 +1,15 @@
+.title,
+.title-smaller {
+  font-size: var(--title-font-size);
+}
+
+.title {
+  font-weight: 600;
+  line-height: 3.2rem;
+}
+
+.title-smaller {
+  word-wrap: break-word;
+  font-weight: 200;
+  line-height: 1rem;
+}

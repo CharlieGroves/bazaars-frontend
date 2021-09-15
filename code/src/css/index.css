@@ -1,0 +1,38 @@
+:root {
+	--company-accent-colour: rgba(79, 185, 255, 0.726);
+	--company-accent-colour-hover: rgba(79, 185, 255, 0.9);
+	--company-accent-colour-focus: rgba(79, 185, 255);
+	--company-warning-colour: rgba(216, 13, 13, 0.74);
+	--text-margin: 1rem;
+	--bottom-box-margin: 1.5rem;
+	--top-box-margin: 1.5rem;
+	--bottom-box-padding: 0.5rem;
+	--top-box-padding: 0.5rem;
+	--flex-left-margin: 2rem;
+	--flex-right-margin: 2rem;
+	--background-colour: #ffffff;
+	--drop-shadow-colour: #eeeeee;
+	--max-width: 50rem;
+	--title-font-size: 2rem;
+	--item-margin: 1rem;
+	--standard-border-radius: 0.3rem;
+}
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}

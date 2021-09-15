@@ -1,0 +1,7 @@
+.form-label {
+    display: flex;
+}
+
+.input {
+  border-radius: var(--standard-border-radius);
+}
