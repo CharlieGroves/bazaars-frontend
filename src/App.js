@@ -19,7 +19,7 @@ function App() {
 				<Switch>
 					<PrivateRoute path="/home" component={Home} />
 					<Route path="/signin" component={SignIn} />
-					<Route path ="/" component={Welcome} />
+					<Route exact path ="/" component={Welcome} />
 					<Route
 						path="/seller/:seller/:shop/:item"
 						component={Item}
