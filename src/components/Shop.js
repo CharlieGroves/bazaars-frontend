@@ -138,7 +138,7 @@ export default function Shop({
 					itemsData.map((item, index) => (
 						<div className="item" key={index}>
 							<Link
-								to={`/seller/${currentUser.uid}/${shop}/${item.itemName}`}
+								to={`/seller/${currentUser.url}/${shop}/${item.itemName}`}
 								className="item-link"
 							>
 								{item.itemName}:
