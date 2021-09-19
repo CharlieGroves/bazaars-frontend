@@ -18,9 +18,7 @@ export default function ManageAccount() {
 	currentUser && console.log(currentUser);
 	accountInformation && console.log(accountInformation);
 
-	const updateAccount = async () => {
-		
-	};
+	const updateAccount = async () => {};
 
 	return (
 		<div className="manage-account-container ml-2">
@@ -28,7 +26,13 @@ export default function ManageAccount() {
 			<form onSubmit={updateAccount} className="update-account-form">
 				<label className="form-label shop-name-label">
 					<div className="title-smaller">Username: &nbsp;</div>
-					<input className="input" required type="text" />
+					<input
+						className="input"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						required
+						type="text"
+					/>
 				</label>
 				<label className="form-label shop-name-label">
 					<div className="title-smaller">URL: &nbsp;</div>
