@@ -21,5 +21,3 @@ export const firestore = firebase.firestore();
 
 // Export the initialized app
 export default app;
-
-console.log(process.env.REACT_APP_PORT)

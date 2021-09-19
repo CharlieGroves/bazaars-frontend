@@ -1,7 +1,10 @@
 import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import {
+	useCollectionData,
+	useDocumentData,
+} from "react-firebase-hooks/firestore";
 
 import { useHistory } from "react-router";
 import "../css/Home.css";
@@ -33,6 +36,7 @@ export default function Home() {
 	}
 
 	const [shops] = useCollectionData(shopsRef);
+	const [userData] = useDocumentData(userRef);
 
 	const newShopHandler = async (e) => {
 		e.preventDefault();
@@ -146,8 +150,7 @@ export default function Home() {
 								<ShopListItem
 									key={index}
 									shop={shop}
-									history={history}
-									currentUser={currentUser}
+									userData={userData}
 								/>
 							))}
 					</div>
