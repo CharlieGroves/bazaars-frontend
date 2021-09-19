@@ -10,11 +10,11 @@ export default function ShopListItem(props) {
 			<div
 				className="shop"
 				onClick={() => {
-					history.push(`/seller/${currentUser.uid}/${shop.name}`);
+					history.push(`/seller/${currentUser.url}/${shop.name}`);
 				}}
 			>
 				<Link
-					to={`/seller/${currentUser.uid}/${shop.name}`}
+					to={`/seller/${currentUser.url}/${shop.name}`}
 					className="shop-link"
 				>
 					<div className="shop-name">
