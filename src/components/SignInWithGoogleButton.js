@@ -17,7 +17,6 @@ export default function SignInWithGoogleButton(props) {
 	const handleSignIn = async (provider) => {
 		setLoading(true);
 		const res = await socialMediaAuth(provider);
-		console.log(res);
 		const { uid, displayName, photoURL } = res;
 		const urlsDocRef = firestore.collection("urls").doc(displayName);
 		const userDocRef = firestore.collection("users").doc(uid)
@@ -54,9 +53,10 @@ export default function SignInWithGoogleButton(props) {
 				});
 			}
 		})
-		
-		
+		// no longer loading
 		setLoading(false);
+
+		// once logged in, redirect user to their homepage
 		history.push("/home");
 	};
 	return (

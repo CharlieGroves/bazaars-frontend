@@ -5,8 +5,6 @@ import {
 	useCollectionData,
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
-
-import { useHistory } from "react-router";
 import "../css/Home.css";
 import "../css/Buttons.css";
 import "../css/Dropdown.css";
@@ -26,7 +24,6 @@ export default function Home() {
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
-	const history = useHistory();
 	const { currentUser, logout } = useAuth();
 
 	if (currentUser) {

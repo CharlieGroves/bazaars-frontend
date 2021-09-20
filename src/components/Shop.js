@@ -32,7 +32,6 @@ export default function Shop({
 	const [itemImageURL, setItemImageURL] = useState(null);
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
-	const [id, setId] = useState("")
 	const { currentUser } = useAuth();
 	let uid = "no user";
 	let shopId = "";

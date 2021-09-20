@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
-import { firestore } from "../firebase";
 
 // Setting up a context to access current user anywhere in the child components of the app
 const AuthenticationContext = React.createContext();

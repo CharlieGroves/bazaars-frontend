@@ -5,8 +5,6 @@ import ArrowRight from "./icons/ArrowRight";
 
 export default function ShopListItem(props) {
 	const { shop, index, userData } = props;
-	console.log(userData)
-	console.log(shop)
 	return (
 		<div>
 			{userData && (
