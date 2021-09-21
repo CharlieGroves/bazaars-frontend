@@ -7,7 +7,7 @@ export default function ShopListItem(props) {
 	const { shop, index, userData } = props;
 	return (
 		<div>
-			// if there is userData and then once userData has loaded
+			{/* if there is userData and then once userData has loaded */}
 			{userData && (
 				<div className="shop-container" key={index}>
 					<div className="shop">
