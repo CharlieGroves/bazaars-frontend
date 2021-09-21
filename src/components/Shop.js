@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 
@@ -15,6 +15,9 @@ export default function Shop({
 		params: { seller, shop },
 	},
 }) {
+	const idRef = firestore.collection("urls").doc(seller);
+
+
 	const shopRef = firestore
 		.collection("users")
 		.doc(seller)
@@ -22,6 +25,7 @@ export default function Shop({
 		.doc(shop);
 	const itemsRef = shopRef.collection("items");
 	const [itemsData] = useCollectionData(itemsRef);
+	const [idData] = useDocumentData(idRef)
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [itemPrice, setItemPrice] = useState();
@@ -30,6 +34,12 @@ export default function Shop({
 	const [imageValue, setImageValue] = useState();
 	const { currentUser } = useAuth();
 	let uid = "no user";
+	let shopId = "";
+	
+	idData && console.log(idData)
+	idData && (shopId = idData.uid)
+
+
 
 	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
@@ -69,7 +79,7 @@ export default function Shop({
 	currentUser && (uid = currentUser.uid);
 	return (
 		<div>
-			{uid !== seller ? (
+			{uid !== shopId ? (
 				<div>
 					<div>Seller {seller}</div>
 					<div>Shop {shop}</div>
@@ -138,7 +148,7 @@ export default function Shop({
 					itemsData.map((item, index) => (
 						<div className="item" key={index}>
 							<Link
-								to={`/seller/${currentUser.url}/${shop}/${item.itemName}`}
+								to={`/seller/${seller}/${shop}/${item.itemName}`}
 								className="item-link"
 							>
 								{item.itemName}:

@@ -1,38 +1,50 @@
 import React, { useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import {
+	useCollectionData,
+	useDocumentData,
+} from "react-firebase-hooks/firestore";
 
-import { useHistory } from "react-router";
+// import css files
 import "../css/Home.css";
 import "../css/Buttons.css";
 import "../css/Dropdown.css";
 
+// import custom made components
 import ArrowDown from "./icons/ArrowDown";
 import ShopListItem from "./ShopListItem";
 import NewShopLabel from "./NewShopLabel";
 import DefaultButton from "./DefaultButton";
 
 export default function Home() {
+	// define variables to be assigned values dynamically later
 	let uid;
 	let userRef;
 	let shopsRef;
 
+	// define constants used the Home function
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const dropdownRef = useRef(null);
-	const history = useHistory();
 	const { currentUser, logout } = useAuth();
 
+	// once currentUser loads
 	if (currentUser) {
+		// extract the uid from currentUser
 		currentUser && (uid = currentUser.uid);
+		// create a database reference for the currentUser
 		currentUser && (userRef = firestore.collection("users").doc(uid));
+		// build on the userRef with a reference to their shops
 		currentUser && (shopsRef = userRef.collection("shops"));
 	}
 
+	// Get information on currentUser's shops from database
 	const [shops] = useCollectionData(shopsRef);
+	// Get information on currentUser from database
+	const [userData] = useDocumentData(userRef);
 
 	const newShopHandler = async (e) => {
 		e.preventDefault();
@@ -146,8 +158,7 @@ export default function Home() {
 								<ShopListItem
 									key={index}
 									shop={shop}
-									history={history}
-									currentUser={currentUser}
+									userData={userData}
 								/>
 							))}
 					</div>

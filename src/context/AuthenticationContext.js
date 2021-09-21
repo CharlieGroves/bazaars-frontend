@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
-import { firestore } from "../firebase";
 
 // Setting up a context to access current user anywhere in the child components of the app
 const AuthenticationContext = React.createContext();
@@ -16,7 +15,7 @@ export function AuthenticationProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 
 	async function signup(email, password) {
-		return await auth.createUserWithEmailAndPassword(email, password);
+		await auth.createUserWithEmailAndPassword(email, password);
 	}
 
 	async function login(email, password) {
@@ -35,22 +34,6 @@ export function AuthenticationProvider({ children }) {
 
 		return unsubscribe;
 	}, []);
-
-	const userRef = firestore.collection("users");
-
-	useEffect(async () => {
-		if (currentUser != null) {
-			const { uid, displayName, photoURL } = currentUser;
-			await userRef.doc(uid).set({
-				username: displayName,
-				id: uid,
-				url: uid,
-				shops: [],
-				admin: false,
-				photoURL: photoURL,
-			});
-		}
-	}, [currentUser]);
 
 	// An array of functions and values to return in the AuthenticationContext.Provider.
 	// It is an array so I can return more than one function/value.
