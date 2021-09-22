@@ -18,33 +18,53 @@ import NewShopLabel from "./NewShopLabel";
 import DefaultButton from "./DefaultButton";
 
 export default function Home() {
-	// define variables to be assigned values dynamically later
+	/* 
+		define variables to be used in the Home function 
+		to be assigned values dynamically once the currentUser loads 
+	*/
+
+	// user id variable
 	let uid;
+	// user database reference variable
 	let userRef;
+	// shop database reference variable
 	let shopsRef;
 
-	// define constants used the Home function
+	/* end define variables */
+
+	/* define constants used the Home function */
+
+	/* define string states */
+
+	// state for the shop name
 	const [shopName, setShopName] = useState("");
+	// state for the shop description
 	const [shopDescription, setShopDescription] = useState("");
+
+	/* define bool states */
+
+	// state for if the user is creating a new shop
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
+	// state for if the dropdown menu is visible
 	const [dropdownVisible, setDropdownVisible] = useState(false);
+
+	/* end define bool states */
+
+	// reference for the dropdown menu
 	const dropdownRef = useRef(null);
+
+	// extract the currentUser and the logout function from the useAuth hook.
 	const { currentUser, logout } = useAuth();
 
-	// once currentUser loads
-	if (currentUser) {
-		// extract the uid from currentUser
-		currentUser && (uid = currentUser.uid);
-		// create a database reference for the currentUser
-		currentUser && (userRef = firestore.collection("users").doc(uid));
-		// build on the userRef with a reference to their shops
-		currentUser && (shopsRef = userRef.collection("shops"));
-	}
+	/* get data from database */
 
 	// Get information on currentUser's shops from database
 	const [shops] = useCollectionData(shopsRef);
+
 	// Get information on currentUser from database
 	const [userData] = useDocumentData(userRef);
+
+	/* end of get data from database */
 
 	const newShopHandler = async (e) => {
 		e.preventDefault();
@@ -69,6 +89,18 @@ export default function Home() {
 	const onDropdownClick = () => {
 		setDropdownVisible(!dropdownVisible);
 	};
+
+	/* end define constants */
+
+	// once currentUser loads
+	if (currentUser) {
+		// extract the uid from currentUser
+		currentUser && (uid = currentUser.uid);
+		// create a database reference for the currentUser
+		currentUser && (userRef = firestore.collection("users").doc(uid));
+		// build on the userRef with a reference to their shops
+		currentUser && (shopsRef = userRef.collection("shops"));
+	}
 
 	return (
 		<div className="home-container">
