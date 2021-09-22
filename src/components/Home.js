@@ -74,20 +74,20 @@ export default function Home() {
 		});
 		setShopName("");
 		setShopDescription("");
-		newShopClickHandler();
+		return newShopClickHandler();
 	};
 
 	const newShopClickHandler = () => {
-		setCreatingNewShop(!creatingNewShop);
+		return setCreatingNewShop(!creatingNewShop);
 	};
 
 	const handleLogout = async (e) => {
 		e.preventDefault();
-		await logout();
+		return await logout();
 	};
 
 	const onDropdownClick = () => {
-		setDropdownVisible(!dropdownVisible);
+		return setDropdownVisible(!dropdownVisible);
 	};
 
 	/* end define constants */
