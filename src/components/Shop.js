@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
+import {
+	useCollectionData,
+	useDocumentData,
+} from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
 
@@ -17,7 +20,6 @@ export default function Shop({
 }) {
 	const idRef = firestore.collection("urls").doc(seller);
 
-
 	const shopRef = firestore
 		.collection("users")
 		.doc(seller)
@@ -25,7 +27,7 @@ export default function Shop({
 		.doc(shop);
 	const itemsRef = shopRef.collection("items");
 	const [itemsData] = useCollectionData(itemsRef);
-	const [idData] = useDocumentData(idRef)
+	const [idData] = useDocumentData(idRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [itemPrice, setItemPrice] = useState();
@@ -35,11 +37,9 @@ export default function Shop({
 	const { currentUser } = useAuth();
 	let uid = "no user";
 	let shopId = "";
-	
-	idData && console.log(idData)
-	idData && (shopId = idData.uid)
 
-
+	idData && console.log(idData);
+	idData && (shopId = idData.uid);
 
 	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
@@ -118,7 +118,7 @@ export default function Shop({
 								</label>
 								<br />
 								<label>
-									Item Price: &nbsp;
+									Image: &nbsp;
 									<input
 										required
 										type="file"
@@ -126,18 +126,22 @@ export default function Shop({
 										onChange={onFileChange}
 									/>
 								</label>
+								<br />
 								{imageUploadLoading ? (
 									<div className="loader" />
 								) : (
 									<button type="submit">Create</button>
 								)}
+								<button onClick={creatingNewItemStateChange}>
+									Cancel
+								</button>
 							</form>
-							<button onClick={creatingNewItemStateChange}>
-								Cancel
-							</button>
 						</div>
 					) : (
-						<button className="shop-button make-new-item-button" onClick={creatingNewItemStateChange}>
+						<button
+							className="shop-button make-new-item-button"
+							onClick={creatingNewItemStateChange}
+						>
 							Make a new item
 						</button>
 					)}

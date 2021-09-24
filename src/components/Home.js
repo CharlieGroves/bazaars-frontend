@@ -18,10 +18,8 @@ import NewShopLabel from "./NewShopLabel";
 import DefaultButton from "./DefaultButton";
 
 export default function Home() {
-	/* 
-		define variables to be used in the Home function 
-		to be assigned values dynamically once the currentUser loads 
-	*/
+	/* 	define variables to be used in the Home function 
+	to be assigned values dynamically once the currentUser loads */
 
 	// user id variable
 	let uid;
@@ -55,6 +53,16 @@ export default function Home() {
 
 	// extract the currentUser and the logout function from the useAuth hook.
 	const { currentUser, logout } = useAuth();
+		
+	// once currentUser loads
+	if (currentUser) {
+		// extract the uid from currentUser
+		currentUser && (uid = currentUser.uid);
+		// create a database reference for the currentUser
+		currentUser && (userRef = firestore.collection("users").doc(uid));
+		// build on the userRef with a reference to their shops
+		currentUser && (shopsRef = userRef.collection("shops"));
+	}
 
 	/* get data from database */
 
@@ -91,16 +99,6 @@ export default function Home() {
 	};
 
 	/* end define constants */
-
-	// once currentUser loads
-	if (currentUser) {
-		// extract the uid from currentUser
-		currentUser && (uid = currentUser.uid);
-		// create a database reference for the currentUser
-		currentUser && (userRef = firestore.collection("users").doc(uid));
-		// build on the userRef with a reference to their shops
-		currentUser && (shopsRef = userRef.collection("shops"));
-	}
 
 	return (
 		<div className="home-container">
