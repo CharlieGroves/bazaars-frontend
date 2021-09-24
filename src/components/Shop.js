@@ -55,6 +55,7 @@ export default function Shop({
 
 	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
+		return setImageUploadLoading(false)
 	}
 
 	const newItemHandler = async (e) => {
