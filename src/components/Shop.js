@@ -6,6 +6,7 @@ import {
 } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
+import Compress from "browser-image-compression";
 
 import app from "../firebase";
 import "../css/Shop.css";
@@ -35,6 +36,17 @@ export default function Shop({
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
 	const { currentUser } = useAuth();
+
+	// Compression config
+	const options = {
+		// As the key specify the maximum size
+		// Leave blank for infinity
+		maxSizeMB: 1.5,
+		// Use webworker for faster compression with
+		// the help of threads
+		useWebWorker: true,
+	};
+
 	let uid = "no user";
 	let shopId = "";
 
@@ -60,20 +72,43 @@ export default function Shop({
 	};
 
 	const onFileChange = async (e) => {
-		setImageUploadLoading(true);
 		const file = e.target.files[0];
-		const storageRef = app.storage().ref();
-		const fileRef = storageRef.child(file.name);
-		await fileRef
-			.put(file)
-			.then(async () => {
-				setItemImageURL(await fileRef.getDownloadURL());
-				console.log(e.target.value);
+		setImageUploadLoading(true);
+		// Initialize compression
+		// First argument is the file object from the input
+		// Second argument is the options object with the
+		// config
+		Compress(file, options)
+			.then(async (compressedBlob) => {
+
+				// Get the modified date of the file from the compressedBlob
+				// so the file still shows correct metadata
+				compressedBlob.lastModifiedDate = new Date();
+
+				// Convert the blob to file
+				const convertedBlobFile = new File(
+					[compressedBlob],
+					file.name,
+					{ type: file.type, lastModified: Date.now() }
+				);
+
+				// upload file to cloud storage
+				const storageRef = app.storage().ref();
+				const fileRef = storageRef.child(file.name);
+				await fileRef
+					.put(convertedBlobFile)
+					.then(async () => {
+						setItemImageURL(await fileRef.getDownloadURL());
+						console.log(e.target.value);
+					})
+					.finally(() => {
+						setImageUploadLoading(false);
+					});
+				console.log(itemImageURL);
 			})
-			.finally(() => {
-				setImageUploadLoading(false);
+			.catch((e) => {
+				// Show the user a toast message or notification that something went wrong while compressing file
 			});
-		console.log(itemImageURL);
 	};
 
 	currentUser && (uid = currentUser.uid);
