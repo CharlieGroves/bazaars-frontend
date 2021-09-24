@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import {
-	useCollectionData,
-	useDocumentData,
-} from "react-firebase-hooks/firestore";
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
-import Compress from "browser-image-compression";
 
 import app from "../firebase";
 import "../css/Shop.css";
@@ -21,6 +17,7 @@ export default function Shop({
 }) {
 	const idRef = firestore.collection("urls").doc(seller);
 
+
 	const shopRef = firestore
 		.collection("users")
 		.doc(seller)
@@ -28,7 +25,7 @@ export default function Shop({
 		.doc(shop);
 	const itemsRef = shopRef.collection("items");
 	const [itemsData] = useCollectionData(itemsRef);
-	const [idData] = useDocumentData(idRef);
+	const [idData] = useDocumentData(idRef)
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [itemPrice, setItemPrice] = useState();
@@ -36,26 +33,16 @@ export default function Shop({
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
 	const { currentUser } = useAuth();
-
-	// Compression config
-	const options = {
-		// As the key specify the maximum size
-		// Leave blank for infinity
-		maxSizeMB: 1.5,
-		// Use webworker for faster compression with
-		// the help of threads
-		useWebWorker: true,
-	};
-
 	let uid = "no user";
 	let shopId = "";
+	
+	idData && console.log(idData)
+	idData && (shopId = idData.uid)
 
-	idData && console.log(idData);
-	idData && (shopId = idData.uid);
+
 
 	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
-		return setImageUploadLoading(false)
 	}
 
 	const newItemHandler = async (e) => {
@@ -73,43 +60,20 @@ export default function Shop({
 	};
 
 	const onFileChange = async (e) => {
-		const file = e.target.files[0];
 		setImageUploadLoading(true);
-		// Initialize compression
-		// First argument is the file object from the input
-		// Second argument is the options object with the
-		// config
-		Compress(file, options)
-			.then(async (compressedBlob) => {
-
-				// Get the modified date of the file from the compressedBlob
-				// so the file still shows correct metadata
-				compressedBlob.lastModifiedDate = new Date();
-
-				// Convert the blob to file
-				const convertedBlobFile = new File(
-					[compressedBlob],
-					file.name,
-					{ type: file.type, lastModified: Date.now() }
-				);
-
-				// upload file to cloud storage
-				const storageRef = app.storage().ref();
-				const fileRef = storageRef.child(file.name);
-				await fileRef
-					.put(convertedBlobFile)
-					.then(async () => {
-						setItemImageURL(await fileRef.getDownloadURL());
-						console.log(e.target.value);
-					})
-					.finally(() => {
-						setImageUploadLoading(false);
-					});
-				console.log(itemImageURL);
+		const file = e.target.files[0];
+		const storageRef = app.storage().ref();
+		const fileRef = storageRef.child(file.name);
+		await fileRef
+			.put(file)
+			.then(async () => {
+				setItemImageURL(await fileRef.getDownloadURL());
+				console.log(e.target.value);
 			})
-			.catch((e) => {
-				// Show the user a toast message or notification that something went wrong while compressing file
+			.finally(() => {
+				setImageUploadLoading(false);
 			});
+		console.log(itemImageURL);
 	};
 
 	currentUser && (uid = currentUser.uid);
@@ -154,7 +118,7 @@ export default function Shop({
 								</label>
 								<br />
 								<label>
-									Image: &nbsp;
+									Item Price: &nbsp;
 									<input
 										required
 										type="file"
@@ -162,22 +126,18 @@ export default function Shop({
 										onChange={onFileChange}
 									/>
 								</label>
-								<br />
 								{imageUploadLoading ? (
 									<div className="loader" />
 								) : (
 									<button type="submit">Create</button>
 								)}
-								<button onClick={creatingNewItemStateChange}>
-									Cancel
-								</button>
 							</form>
+							<button onClick={creatingNewItemStateChange}>
+								Cancel
+							</button>
 						</div>
 					) : (
-						<button
-							className="shop-button make-new-item-button"
-							onClick={creatingNewItemStateChange}
-						>
+						<button className="shop-button make-new-item-button" onClick={creatingNewItemStateChange}>
 							Make a new item
 						</button>
 					)}
