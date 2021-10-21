@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { firestore } from "../firebase";
 import { useAuth } from "../context/AuthenticationContext";
 import {
-	useCollectionData,
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
+import axios from "axios";
 
 // import css files
 import "../css/Home.css";
@@ -21,13 +21,13 @@ export default function Home() {
 	// define variables to be assigned values dynamically later
 	let uid;
 	let userRef;
-	let shopsRef;
 
 	// define constants used the Home function
 	const [shopName, setShopName] = useState("");
 	const [shopDescription, setShopDescription] = useState("");
 	const [creatingNewShop, setCreatingNewShop] = useState(false);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
+	const [error, setError] = useState("");
 	const dropdownRef = useRef(null);
 	const { currentUser, logout } = useAuth();
 
@@ -37,24 +37,50 @@ export default function Home() {
 		currentUser && (uid = currentUser.uid);
 		// create a database reference for the currentUser
 		currentUser && (userRef = firestore.collection("users").doc(uid));
-		// build on the userRef with a reference to their shops
-		currentUser && (shopsRef = userRef.collection("shops"));
 	}
 
 	// Get information on currentUser's shops from database
-	const [shops] = useCollectionData(shopsRef);
 	// Get information on currentUser from database
 	const [userData] = useDocumentData(userRef);
 
+	const [shops, setShops] = useState()
+
+	useEffect(() => {
+		axios
+			.get(process.env.REACT_APP_BACKEND_IP + "get/shop/id/" + uid)
+			.then((response) => {
+				setShops(response.data)
+			})
+			.catch((error) => {
+				console.log(error.response.status);
+			});
+	}, []);
+
+
 	const newShopHandler = async (e) => {
 		e.preventDefault();
-		await shopsRef.doc(shopName).set({
-			name: shopName,
-			description: shopDescription,
-		});
-		setShopName("");
-		setShopDescription("");
-		newShopClickHandler();
+		setError("");
+		const shop = {
+			shop_name: shopName,
+			owner_id: uid,
+			shop_description: shopDescription,
+			createdAt: Date.now(),
+		};
+		axios
+			.post(process.env.REACT_APP_BACKEND_IP + "post/newshop", shop)
+			.then((response) => {
+				setShopName("");
+				setShopDescription("");
+				return newShopClickHandler();
+			})
+			.catch((error) => {
+				console.log(error.response.status);
+				if (error.response.status === 409) {
+					return setError(
+						`You already have shop with name "${shopName}"`
+					);
+				}
+			});
 	};
 
 	const newShopClickHandler = () => {
@@ -134,6 +160,7 @@ export default function Home() {
 							Create
 						</button>
 					</form>
+					{error}
 					<br />
 					<button
 						className="creating-new-shop-cancel cancel-button"
