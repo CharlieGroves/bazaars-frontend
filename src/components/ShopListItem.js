@@ -12,18 +12,18 @@ export default function ShopListItem(props) {
 				<div className="shop-container" key={index}>
 					<div className="shop">
 						<Link
-							to={`/seller/${userData.url}/${shop.name}`}
+							to={`/seller/${userData.url}/${shop.shop_name}`}
 							className="shop-link"
 						>
 							<div className="shop-name">
-								<b>{shop.name}</b>
+								<b>{shop.shop_name}</b>
 							</div>
 							<div className="shop-description">
-								{shop.description}
+								{shop.shop_description}
 							</div>
 						</Link>
 						<div className="arrow-right-container">
-							<Link to={`/seller/${userData.url}/${shop.name}`}>
+							<Link to={`/seller/${userData.url}/${shop.shop_name}`}>
 								<ArrowRight className="right-arrow" />
 							</Link>
 						</div>

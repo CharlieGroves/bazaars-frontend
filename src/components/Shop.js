@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import {
-	useCollectionData,
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import app from "../firebase";
 import "../css/Shop.css";
@@ -20,13 +20,7 @@ export default function Shop({
 }) {
 	const idRef = firestore.collection("urls").doc(seller);
 
-	const shopRef = firestore
-		.collection("users")
-		.doc(seller)
-		.collection("shops")
-		.doc(shop);
-	const itemsRef = shopRef.collection("items");
-	const [itemsData] = useCollectionData(itemsRef);
+	const [itemsData, setItemsData] = useState()
 	const [idData] = useDocumentData(idRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
@@ -34,11 +28,24 @@ export default function Shop({
 	const [itemImageURL, setItemImageURL] = useState(null);
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
+	const [tags, setTags] = useState([]);
+	const [error, setError] = useState("")
 	const { currentUser } = useAuth();
 	let uid = "no user";
 	let shopId = "";
 
-	idData && console.log(idData);
+	useEffect(() => {
+		axios
+			.get(process.env.REACT_APP_BACKEND_IP + "get/item/" + shop)
+			.then((response) => {
+				setItemsData(response.data)
+				console.log(response.data)
+			})
+			.catch((error) => {
+				console.log(error.response.status);
+			});
+	}, []);
+
 	idData && (shopId = idData.uid);
 
 	async function creatingNewItemStateChange() {
@@ -48,15 +55,30 @@ export default function Shop({
 	const newItemHandler = async (e) => {
 		e.preventDefault();
 		setItemPrice(parseInt(itemPrice, 10));
-		await itemsRef.doc(itemName).set({
+		const item = {
 			itemName: itemName,
 			itemPrice: itemPrice,
 			itemImageURL: itemImageURL,
-		});
-		setItemName("");
-		setItemPrice("");
-		setImageValue("");
-		console.log("new item handler function");
+			shopName: shop,
+			createdAt: Date.now(),
+			staffId: idData.uid,
+			tags: tags,
+		};
+		axios
+			.post(process.env.REACT_APP_BACKEND_IP + "post/newitem", item)
+			.then((response) => {
+				setItemName("");
+				setItemPrice("");
+				return setImageValue("");
+			})
+			.catch((error) => {
+				console.log(error.response.status);
+				if (error.response.status === 409) {
+					return setError(
+						`error"`
+					);
+				}
+			});
 	};
 
 	const onFileChange = async (e) => {
@@ -117,8 +139,21 @@ export default function Shop({
 									/>
 								</label>
 								<br />
+								
 								<label>
-									Image: &nbsp;
+									Item Tags: &nbsp;
+									<input
+										required
+										type="text"
+										value={tags}
+										onChange={(e) =>
+											setTags(e.target.value)
+										}
+									/>
+								</label>
+								<br />
+								<label>
+									Item Image: &nbsp;
 									<input
 										required
 										type="file"
@@ -169,6 +204,7 @@ export default function Shop({
 				) : (
 					<div>No items in this shop</div>
 				)}
+				{error}
 			</div>
 		</div>
 	);
