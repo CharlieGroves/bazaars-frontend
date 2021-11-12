@@ -62,6 +62,7 @@ export default function Shop({
 			shopName: shop,
 			createdAt: Date.now(),
 			staffId: idData.uid,
+			sellerId: currentUser.uid,
 			tags: tags,
 		};
 		axios

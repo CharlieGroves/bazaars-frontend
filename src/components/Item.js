@@ -10,18 +10,13 @@ export default function Item({
 }) {
 	let description;
 	let value;
-	const itemRef = firestore
-		.collection("users")
-		.doc(seller)
-		.collection("shops")
-		.doc(shop)
-		.collection("items")
-		.doc(item);
+	const itemRef = firestore.collection("items").doc(item)
 	const [checkout, setCheckout] = useState(false);
 	const [itemData] = useDocumentData(itemRef);
 	itemData && console.log(itemData);
 	itemData && (description = itemData.itemName);
 	itemData && (value = itemData.itemPrice);
+	
 	return (
 		<div>
 			{checkout ? (

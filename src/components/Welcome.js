@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import GoogleButton from "react-google-button";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 import { googleProvider } from "../context/authMethods";
 import socialMediaAuth from "../socialMediaAuth";
@@ -17,6 +19,21 @@ import "../css/Paddings.css";
 export default function Welcome() {
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
+	const [itemsData, setItemsData] = useState()
+
+	
+	useEffect(() => {
+		axios
+			.get(process.env.REACT_APP_BACKEND_IP + "get/all/items")
+			.then((response) => {
+				setItemsData(response.data)
+				console.log(response.data)
+			})
+			.catch((error) => {
+				console.log(error.response.status);
+			});
+	}, []);
+
 	return (
 		<div className="welcome-container">
 			<div className="welcome-header">
@@ -57,6 +74,27 @@ export default function Welcome() {
 					</div>
 				</div>
 			</div>
+			{itemsData ? (
+					itemsData.map((item, index) => (
+						<div className="item" key={index}>
+							<Link
+								to={`/seller/${item.sellerId}/${item.shopName}/${item.itemName}`}
+								className="item-link"
+							>
+								{item.itemName}:
+								<br />
+							</Link>
+							<div className="item-price">£{item.itemPrice}</div>
+							<img
+								alt={item.name}
+								height="300px"
+								src={item.itemImageURL}
+							/>
+						</div>
+					))
+				) : (
+					<div>No items in this shop</div>
+				)}
 		</div>
 	);
 }
