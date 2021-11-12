@@ -2,8 +2,6 @@ import React, { useRef, useEffect } from "react";
 
 export default function PayPal(props) {
 	const paypal = useRef();
-	console.log(props)
-	
 
 	useEffect(() => {
 		window.paypal
