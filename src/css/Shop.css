@@ -4,14 +4,17 @@
 	flex-direction: row;
 	justify-content: space-around;
 	margin-top: var(--top-box-margin);
+	padding-bottom: 20rem;
 }
 
 .item {
-	min-width: 20rem;
-	height: 16rem;
+	max-width: 20rem;
+	height: auto;
 	border-radius: 0.25rem;
-	background-color: #6f6f6f;
+	background-color: #777777;
+	color: white;
 	margin-bottom: var(--item-margin);
+	margin: 1rem;
 }
 
 .item-link {
@@ -22,4 +25,22 @@
 
 .item-price {
 	margin-left: var(--item-margin);
+}
+
+.item-image-container {
+	box-sizing: border-box;
+	position: relative;
+	display: block;
+	max-width: 20rem;
+}
+
+.item-image {
+	max-width: 100%;
+	max-height: 10rem;
+	aspect-ratio: 4/3;
+	object-fit: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }

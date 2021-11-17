@@ -4,7 +4,6 @@ import {
 	useDocumentData,
 } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import app from "../firebase";
@@ -12,6 +11,7 @@ import "../css/Shop.css";
 import "../css/Loader.css";
 import "../css/Form.css";
 import "../css/Buttons.css";
+import ShopItem from "./shopItem";
 
 export default function Shop({
 	match: {
@@ -183,30 +183,7 @@ export default function Shop({
 					)}
 				</div>
 			)}
-			<div className="item-container">
-				{itemsData ? (
-					itemsData.map((item, index) => (
-						<div className="item" key={index}>
-							<Link
-								to={`/seller/${seller}/${shop}/${item.itemName}`}
-								className="item-link"
-							>
-								{item.itemName}:
-								<br />
-							</Link>
-							<div className="item-price">£{item.itemPrice}</div>
-							<img
-								alt={item.name}
-								height="300px"
-								src={item.itemImageURL}
-							/>
-						</div>
-					))
-				) : (
-					<div>No items in this shop</div>
-				)}
-				{error}
-			</div>
+			<ShopItem itemsData={itemsData}/>
 		</div>
 	);
 }
