@@ -29,6 +29,7 @@ export default function Welcome() {
 			.then((response) => {
 				setItemsData(response.data);
 				setData(response.data);
+				console.log(response.data);
 			})
 			.catch((error) => {
 				console.log(error.response.status);

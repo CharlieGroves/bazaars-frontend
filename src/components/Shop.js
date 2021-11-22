@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
-import {
-	useDocumentData,
-} from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
+import Select from 'react-select';
 import axios from "axios";
 
 import app from "../firebase";
@@ -18,9 +17,26 @@ export default function Shop({
 		params: { seller, shop },
 	},
 }) {
+	const categories = [
+		"Books",
+		"Clothing, Shoes & Accessories",
+		"Computers/Tablets & Networking",
+		"Consumer Electronics",
+		"Craft",
+		"Garden",
+		"Home",
+		"Pets",
+		"Toys",
+	];
+
+	let categoriesList = [];
+	categories.forEach(function (element) {
+		categoriesList.push({ label: element, value: element });
+	});
+
 	const idRef = firestore.collection("urls").doc(seller);
 
-	const [itemsData, setItemsData] = useState()
+	const [itemsData, setItemsData] = useState();
 	const [idData] = useDocumentData(idRef);
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
@@ -29,7 +45,7 @@ export default function Shop({
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
 	const [tags, setTags] = useState([]);
-	const [error, setError] = useState("")
+	const [error, setError] = useState("");
 	const { currentUser } = useAuth();
 	let uid = "no user";
 	let shopId = "";
@@ -38,8 +54,7 @@ export default function Shop({
 		axios
 			.get(process.env.REACT_APP_BACKEND_IP + "get/item/" + shop)
 			.then((response) => {
-				setItemsData(response.data)
-				console.log(response.data)
+				setItemsData(response.data);
 			})
 			.catch((error) => {
 				console.log(error.response.status);
@@ -75,9 +90,7 @@ export default function Shop({
 			.catch((error) => {
 				console.log(error.response.status);
 				if (error.response.status === 409) {
-					return setError(
-						`error"`
-					);
+					return setError(`error"`);
 				}
 			});
 	};
@@ -110,6 +123,7 @@ export default function Shop({
 			) : (
 				<div>
 					<div>hello seller</div>
+					
 
 					{creatingNewItem ? (
 						<div>
@@ -140,7 +154,7 @@ export default function Shop({
 									/>
 								</label>
 								<br />
-								
+
 								<label>
 									Item Tags: &nbsp;
 									<input
@@ -152,6 +166,9 @@ export default function Shop({
 										}
 									/>
 								</label>
+								<br />
+								<label htmlFor="Category">Category: </label>
+								<Select className="ml-4 mr-4" options={categoriesList} />
 								<br />
 								<label>
 									Item Image: &nbsp;
@@ -183,7 +200,7 @@ export default function Shop({
 					)}
 				</div>
 			)}
-			<ShopItem itemsData={itemsData}/>
+			<ShopItem itemsData={itemsData} />
 		</div>
 	);
 }
