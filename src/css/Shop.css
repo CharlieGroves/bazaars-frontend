@@ -63,5 +63,10 @@
 }
 
 .select-container {
-	max-width: 300px;
+	max-width: auto;
+}
+
+.rfs-option {
+	width: 95%!important;
+	height: auto!important;
 }

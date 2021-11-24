@@ -142,10 +142,10 @@ export default function Shop({
 				</div>
 			) : (
 				<div>
-					<div  className="ml-3">hello seller</div>
+					<div className="ml-3">hello seller</div>
 
 					{creatingNewItem ? (
-						<div  className="ml-3">
+						<div className="ml-3">
 							<form onSubmit={newItemHandler}>
 								<label className="shop-label">
 									Item Name: &nbsp;
@@ -195,16 +195,14 @@ export default function Shop({
 								>
 									Category:
 									<div className="select-container">
-									<Select
-										required
-										className="ml-4 mr-4"
-										options={categoriesList}
-										className="select"
-										// onOptionChange={(e) => setSelectedCategory(e.target.value)}
-										onOptionChange={(e) =>
-											setSelectedCategory(e.label)
-										}
-									/>
+										<Select
+											required
+											className="ml-4 mr-4 select"
+											options={categoriesList}
+											onOptionChange={(e) =>
+												setSelectedCategory(e.label)
+											}
+										/>
 									</div>
 								</label>
 								<br />
