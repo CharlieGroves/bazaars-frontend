@@ -64,9 +64,10 @@
 
 .select-container {
 	max-width: auto;
+	margin-right: 2rem;
 }
 
 .rfs-option {
-	width: 95%!important;
+	width: fit-content;
 	height: auto!important;
 }
