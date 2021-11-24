@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuth } from "../context/AuthenticationContext";
-import Select from 'react-select';
+import { Select } from "react-functional-select";
 import axios from "axios";
 
 import app from "../firebase";
@@ -46,6 +46,8 @@ export default function Shop({
 	const [imageValue, setImageValue] = useState();
 	const [tags, setTags] = useState([]);
 	const [error, setError] = useState("");
+	const [selectedCategory, setSelectedCategory] = useState("");
+	const [isImageValid, setIsImageValid] = useState(true);
 	const { currentUser } = useAuth();
 	let uid = "no user";
 	let shopId = "";
@@ -65,10 +67,16 @@ export default function Shop({
 
 	async function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
+		setError("");
 	}
 
 	const newItemHandler = async (e) => {
 		e.preventDefault();
+		if (!isImageValid) {
+			return setError(
+				"Please choose another file with either png or jpg file extension"
+			);
+		}
 		setItemPrice(parseInt(itemPrice, 10));
 		const item = {
 			itemName: itemName,
@@ -79,12 +87,15 @@ export default function Shop({
 			staffId: idData.uid,
 			sellerId: currentUser.uid,
 			tags: tags,
+			category: selectedCategory,
 		};
 		axios
 			.post(process.env.REACT_APP_BACKEND_IP + "post/newitem", item)
 			.then((response) => {
 				setItemName("");
 				setItemPrice("");
+				setTags([]);
+				setSelectedCategory("");
 				return setImageValue("");
 			})
 			.catch((error) => {
@@ -100,6 +111,15 @@ export default function Shop({
 		const file = e.target.files[0];
 		const storageRef = app.storage().ref();
 		const fileRef = storageRef.child(file.name);
+		console.log(file.name);
+		let fileExtension = file.name.split(".").pop();
+		if ((fileExtension !== "png", "jpg")) {
+			setImageUploadLoading(false);
+			setItemImageURL("");
+			setImageValue();
+			setIsImageValid(false);
+			return setError("not a valid file format, please use png or jpg");
+		}
 		await fileRef
 			.put(file)
 			.then(async () => {
@@ -122,13 +142,12 @@ export default function Shop({
 				</div>
 			) : (
 				<div>
-					<div>hello seller</div>
-					
+					<div  className="ml-3">hello seller</div>
 
 					{creatingNewItem ? (
-						<div>
+						<div  className="ml-3">
 							<form onSubmit={newItemHandler}>
-								<label>
+								<label className="shop-label">
 									Item Name: &nbsp;
 									<input
 										required
@@ -137,10 +156,11 @@ export default function Shop({
 										onChange={(e) =>
 											setItemName(e.target.value)
 										}
+										className="shop-input"
 									/>
 								</label>
 								<br />
-								<label>
+								<label className="shop-label">
 									Item Price: &nbsp;
 									<input
 										required
@@ -151,11 +171,12 @@ export default function Shop({
 										}
 										min="0"
 										step="any"
+										className="shop-input"
 									/>
 								</label>
 								<br />
 
-								<label>
+								<label className="shop-label">
 									Item Tags: &nbsp;
 									<input
 										required
@@ -164,13 +185,30 @@ export default function Shop({
 										onChange={(e) =>
 											setTags(e.target.value)
 										}
+										className="shop-input"
 									/>
 								</label>
 								<br />
-								<label htmlFor="Category">Category: </label>
-								<Select className="ml-4 mr-4" options={categoriesList} />
+								<label
+									className="shop-label"
+									htmlFor="Category"
+								>
+									Category:
+									<div className="select-container">
+									<Select
+										required
+										className="ml-4 mr-4"
+										options={categoriesList}
+										className="select"
+										// onOptionChange={(e) => setSelectedCategory(e.target.value)}
+										onOptionChange={(e) =>
+											setSelectedCategory(e.label)
+										}
+									/>
+									</div>
+								</label>
 								<br />
-								<label>
+								<label className="shop-label">
 									Item Image: &nbsp;
 									<input
 										required
@@ -179,6 +217,8 @@ export default function Shop({
 										onChange={onFileChange}
 									/>
 								</label>
+								<br />
+								{error}
 								<br />
 								{imageUploadLoading ? (
 									<div className="loader" />
