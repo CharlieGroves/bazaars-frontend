@@ -41,6 +41,7 @@ export default function Shop({
 	const [creatingNewItem, setCreatingNewItem] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [itemPrice, setItemPrice] = useState();
+	const [itemDescription, setItemDescription] = useState("");
 	const [itemImageURL, setItemImageURL] = useState(null);
 	const [imageUploadLoading, setImageUploadLoading] = useState(false);
 	const [imageValue, setImageValue] = useState();
@@ -81,6 +82,7 @@ export default function Shop({
 		const item = {
 			itemName: itemName,
 			itemPrice: itemPrice,
+			itemDescription: itemDescription,
 			itemImageURL: itemImageURL,
 			shopName: shop,
 			createdAt: Date.now(),
@@ -107,18 +109,22 @@ export default function Shop({
 	};
 
 	const onFileChange = async (e) => {
+		setIsImageValid(true);
+		setError("")
 		setImageUploadLoading(true);
 		const file = e.target.files[0];
 		const storageRef = app.storage().ref();
 		const fileRef = storageRef.child(file.name);
 		console.log(file.name);
 		let fileExtension = file.name.split(".").pop();
-		if ((fileExtension !== "png", "jpg")) {
+		if (fileExtension !== ("png" || "jpg")) {
 			setImageUploadLoading(false);
 			setItemImageURL("");
 			setImageValue();
 			setIsImageValid(false);
 			return setError("not a valid file format, please use png or jpg");
+		} else {
+			setIsImageValid(true);
 		}
 		await fileRef
 			.put(file)
@@ -155,6 +161,20 @@ export default function Shop({
 										value={itemName}
 										onChange={(e) =>
 											setItemName(e.target.value)
+										}
+										className="shop-input"
+										style={{ marginBottom: "1rem" }}
+									/>
+								</label>
+								<br />
+								<label className="shop-label">
+									Item Description: &nbsp;
+									<textarea
+										required
+										type="text-area"
+										value={itemDescription}
+										onChange={(e) =>
+											setItemDescription(e.target.value)
 										}
 										className="shop-input"
 									/>
