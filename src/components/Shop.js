@@ -65,7 +65,7 @@ export default function Shop({
 
 	idData && (shopId = idData.uid);
 
-	async function creatingNewItemStateChange() {
+	function creatingNewItemStateChange() {
 		setCreatingNewItem(!creatingNewItem);
 		setError("");
 	}

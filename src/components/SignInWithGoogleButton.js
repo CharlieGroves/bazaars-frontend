@@ -14,7 +14,7 @@ export default function SignInWithGoogleButton(props) {
 
 	const urlsRef = firestore.collection("urls");
 
-	const [error, setError] = useState('')
+	const [error, setError] = useState("");
 
 	const handleSignIn = async (provider) => {
 		setLoading(true);
@@ -65,13 +65,9 @@ export default function SignInWithGoogleButton(props) {
 					.catch((error) => {
 						console.log(error.response.status);
 						if (error.response.status === 409) {
-							return setError(
-								`error`
-							);
+							return setError(`error`);
 						}
 					});
-				
-				
 			}
 		});
 		// no longer loading
@@ -87,7 +83,7 @@ export default function SignInWithGoogleButton(props) {
 			) : (
 				<GoogleButton onClick={() => handleSignIn(googleProvider)} />
 			)}
-		{error}
+			{error}
 		</div>
 	);
 }
