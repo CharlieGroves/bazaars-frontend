@@ -79,6 +79,8 @@ export default function Shop({
 			);
 		}
 		setItemPrice(parseInt(itemPrice, 10));
+		let split_tags = tags.split(" ").join("").split(",");
+		console.log(split_tags)
 		const item = {
 			itemName: itemName,
 			itemPrice: itemPrice,
@@ -88,7 +90,7 @@ export default function Shop({
 			createdAt: Date.now(),
 			staffId: idData.uid,
 			sellerId: currentUser.uid,
-			tags: tags,
+			tags: split_tags,
 			category: selectedCategory,
 		};
 		axios
@@ -117,7 +119,8 @@ export default function Shop({
 		const fileRef = storageRef.child(file.name);
 		console.log(file.name);
 		let fileExtension = file.name.split(".").pop();
-		if (fileExtension !== ("png" || "jpg")) {
+		console.log(fileExtension == "jpg")
+		if (fileExtension.trim() !== ("jpg" || "png")) {
 			setImageUploadLoading(false);
 			setItemImageURL("");
 			setImageValue();
@@ -206,6 +209,7 @@ export default function Shop({
 											setTags(e.target.value)
 										}
 										className="shop-input"
+										placeholder="Separate tags with commas"
 									/>
 								</label>
 								<br />

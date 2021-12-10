@@ -35,7 +35,7 @@ export default function Item({
 			<SearchBar />
 			<div className="items-grid-container">
 				<div className="items-grid">
-					<div className="item-grid-header">Search Bar</div>
+					<div className="item-grid-header" />
 					<div className="item-grid-left">
 						{itemData ? (
 							<div className="image-container">
