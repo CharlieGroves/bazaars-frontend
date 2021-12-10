@@ -11,6 +11,7 @@ import Seller from "./components/Seller";
 import Item from "./components/Item";
 import ManageAccount from "./components/ManageAccount";
 import Welcome from "./components/Welcome";
+import Search from "./components/Search";
 
 function App() {
 	return (
@@ -19,14 +20,15 @@ function App() {
 				<Switch>
 					<PrivateRoute path="/home" component={Home} />
 					<Route path="/signin" component={SignIn} />
-					<Route exact path ="/" component={Welcome} />
 					<Route
 						path="/seller/:seller/:shop/:item"
 						component={Item}
 					/>
 					<Route path="/seller/:seller/:shop" component={Shop} />
 					<Route path="/seller/:seller" component={Seller} />
+					<Route exact path="/search/:query" component={Search} />
 					<PrivateRoute path="/manage-account" component={ManageAccount} />
+					<Route exact path ="/" component={Welcome} />
 				</Switch>
 			</AuthenticationProvider>
 		</Router>

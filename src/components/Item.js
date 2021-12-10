@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PayPal from "./PayPal";
 import axios from "axios";
 import "../css/Items.css";
+import SearchBar from "./SearchBar";
 
 export default function Item({
 	match: {
@@ -31,12 +32,13 @@ export default function Item({
 
 	return (
 		<div>
+			<SearchBar />
 			<div className="items-grid-container">
 				<div className="items-grid">
 					<div className="item-grid-header">Search Bar</div>
 					<div className="item-grid-left">
 						{itemData ? (
-							<div>
+							<div className="image-container">
 								<img
 									className="item-image"
 									src={itemData.itemImageURL}

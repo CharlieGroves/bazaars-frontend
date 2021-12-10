@@ -1,0 +1,28 @@
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  width: 80vw;
+  margin-top: 0;
+}
+
+.search-bar-form {
+  width: 100%;
+}
+
+.search-bar-input {
+  font-size: 1rem;
+  font-weight: 200;
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 2rem;
+  width: 100%;
+  outline: 0;
+  background-color: #ffffff;
+}
