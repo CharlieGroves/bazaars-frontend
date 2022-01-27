@@ -2,6 +2,7 @@ import React from "react";
 import "firebase/firestore";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
@@ -17,22 +18,27 @@ function App() {
 	return (
 		<Router>
 			<AuthenticationProvider>
-				<Switch>
-					<PrivateRoute path="/home" component={Home} />
-					<Route path="/signin" component={SignIn} />
-					<Route
-						path="/seller/:seller/:shop/:item"
-						component={Item}
-					/>
-					<Route path="/seller/:seller/:shop" component={Shop} />
-					<Route path="/seller/:seller" component={Seller} />
-					<Route exact path="/search/:query" component={Search} />
-					<PrivateRoute path="/manage-account" component={ManageAccount} />
-					<Route exact path ="/" component={Welcome} />
-				</Switch>
+				<ShoppingCartProvider>
+					<Switch>
+						<PrivateRoute path="/home" component={Home} />
+						<Route path="/signin" component={SignIn} />
+						<Route
+							path="/seller/:seller/:shop/:item"
+							component={Item}
+						/>
+						<Route path="/seller/:seller/:shop" component={Shop} />
+						<Route path="/seller/:seller" component={Seller} />
+						<Route exact path="/search/:query" component={Search} />
+						<PrivateRoute
+							path="/manage-account"
+							component={ManageAccount}
+						/>
+						<Route exact path="/" component={Welcome} />
+					</Switch>
+				</ShoppingCartProvider>
 			</AuthenticationProvider>
 		</Router>
 	);
 }
- 
+
 export default App;

@@ -13,7 +13,7 @@ export default function SignInWithGoogleButton(props) {
 	} = props;
 
 	const urlsRef = firestore.collection("urls");
-
+	
 	const [error, setError] = useState("");
 
 	const handleSignIn = async (provider) => {
@@ -30,13 +30,15 @@ export default function SignInWithGoogleButton(props) {
 				// create user document
 
 				const user = {
-					username: displayName,
 					id: uid,
+					username: displayName,
 					url: displayName,
 					admin: false,
 					photoURL: photoURL,
+					shoppingCart: [],
 					createdAt: Date.now(),
 				};
+				console.log(user)
 
 				axios
 					.post(
@@ -63,10 +65,10 @@ export default function SignInWithGoogleButton(props) {
 						});
 					})
 					.catch((error) => {
-						console.log(error.response.status);
-						if (error.response.status === 409) {
-							return setError(`error`);
-						}
+						//console.log(error.response.status);
+						// if (error.response.status === 409) {
+						// 	return setError(`error`);
+						// }
 					});
 			}
 		});

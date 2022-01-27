@@ -18,7 +18,9 @@
 		"react-google-button": "^0.7.2",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "^1.1.5",
+		"react-simple-star-rating": "^4.0.2",
 		"react-window": "^1.8.6",
+		"reactjs-popup": "^2.0.5",
 		"styled-components": "^5.3.3",
 		"web-vitals": "^1.1.2"
 	},

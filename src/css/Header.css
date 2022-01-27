@@ -1,0 +1,12 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.shopping-cart-svg {
+    height: 77px;
+    width: 77px;
+    margin-top: 1rem;
+}

@@ -119,7 +119,6 @@ export default function Shop({
 		const fileRef = storageRef.child(file.name);
 		console.log(file.name);
 		let fileExtension = file.name.split(".").pop();
-		console.log(fileExtension == "jpg")
 		if (fileExtension.trim() !== ("jpg" || "png")) {
 			setImageUploadLoading(false);
 			setItemImageURL("");

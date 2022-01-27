@@ -1,70 +1,92 @@
 .item-grid-header {
-  grid-area: header;
+	grid-area: header;
 }
 
 .item-grid-left {
-  grid-area: left;
+	grid-area: left;
 }
 
 .item-grid-middle {
-  grid-area: middle;
+	grid-area: middle;
 }
 
 .item-grid-right {
-  grid-area: right;
+	grid-area: right;
 }
 
 .item-grid-footer {
-  grid-area: footer;
+	grid-area: footer;
 }
 
 .items-grid {
-  display: grid;
-  color: black;
-  background-color: #ffffff;
-  grid-template-areas:
-    "header header header header header header header header"
-    "left left middle middle middle middle right right"
-    "footer footer footer footer footer footer footer footer";
-  grid-gap: 10px;
-  padding: 10px;
+	display: grid;
+	color: black;
+	background-color: #ffffff;
+	grid-template-areas:
+		"header header header header header header header header"
+		"left left middle middle middle middle right right"
+		"footer footer footer footer footer footer footer footer";
+	grid-gap: 10px;
+	padding: 10px;
 }
 
 .items-grid > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 30px;
+	background-color: rgba(255, 255, 255, 0.8);
+	font-size: 30px;
 }
 
 .item-image {
-  aspect-ratio: 4.2/4;
-  object-fit: cover;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+	aspect-ratio: 4.2/4;
+	object-fit: cover;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 .item-grid-left {
-  padding: 0 !important;
+	padding: 0 !important;
 }
 
 .image-container {
-  align-items: center;
+	align-items: center;
 }
 
 .right {
-  border-style: solid;
-  border-radius: 8px;
-  border-color: #f6f6f6;
-  padding: 1rem;
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #f6f6f6;
+	padding: 1rem;
 }
 
 .button-container {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .smaller-text {
-  font-weight: 100;
-  font-size: 1.2rem;
+	font-weight: 100;
+	font-size: 1.2rem;
+}
+
+.review-title-input {
+	margin-bottom: 1rem;
+}
+
+.review-title {
+	font-size: 1.1rem;
+}
+
+.review-text {
+	font-weight: 100;
+	font-size: 0.8rem;
+}
+
+.no-reviews {
+	font-weight: 100;
+	font-size: 1rem;
+}
+
+.review-sent {
+	color: green;
 }

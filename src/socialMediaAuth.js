@@ -1,6 +1,6 @@
 import { auth } from "./firebase";
 
-const socialMediaAuth = (provider) => {
+const socialMediaAuth = async (provider) => {
 	return auth
 		.signInWithPopup(provider)
 		.then((res) => {
