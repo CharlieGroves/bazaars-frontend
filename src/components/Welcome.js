@@ -25,7 +25,7 @@ export default function Welcome() {
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_BACKEND_IP + "get/all/items")
+			.get(process.env.REACT_APP_BACKEND_IP + "get/30/items")
 			.then((response) => {
 				setItemsData(response.data);
 				setData(response.data);
