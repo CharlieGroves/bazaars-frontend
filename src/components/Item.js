@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthenticationContext";
 import Review from "./Review";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import Header from "./Header";
+import ShopItemRecomms from "./shopItemRecomms";
 
 export default function Item({
 	match: {
@@ -20,6 +21,7 @@ export default function Item({
 	const [rating, setRating] = useState(0);
 	const [reviewsData, setReviewsData] = useState();
 	const [reviewSent, setReviewSent] = useState(false);
+	const [recomms, setRecomms] = useState();
 	const { currentUser } = useAuth();
 	const {
 		shoppingCart,
@@ -34,6 +36,10 @@ export default function Item({
 	};
 
 	useEffect(async () => {
+		const recommend = {
+			itemName: item,
+		};
+
 		axios
 			.get(process.env.REACT_APP_BACKEND_IP + "get/single-item/" + item)
 			.then((response) => {
@@ -47,9 +53,18 @@ export default function Item({
 				setReviewsData(response.data);
 			})
 			.catch((error) => {});
+
+		console.log(recommend);
+		axios
+			.post(
+				process.env.REACT_APP_BACKEND_IP + "recommend/item/item",
+				recommend
+			)
+			.then(({ data: { recomms } }) => {
+				setRecomms(recomms);
+			});
 		getShoppingCart();
-		
-	}, []);
+	}, [item]);
 
 	const handleReview = (e) => {
 		e.preventDefault();
@@ -76,7 +91,7 @@ export default function Item({
 	};
 
 	const handleAddToCart = () => {
-		console.log(shoppingCart)
+		console.log(shoppingCart);
 		addToCart(itemData);
 		console.log(JSON.stringify(shoppingCart));
 		console.log({ ...shoppingCart });
@@ -199,6 +214,7 @@ export default function Item({
 					</div>
 				</div>
 			</div>
+			{recomms && <ShopItemRecomms itemsData={recomms} />}
 
 			{/* {checkout ? (
 				<PayPal value={value} description={description} />

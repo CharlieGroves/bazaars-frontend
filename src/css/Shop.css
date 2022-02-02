@@ -11,10 +11,16 @@
 	max-width: 20rem;
 	height: auto;
 	border-radius: 0.25rem;
-	background-color: #777777;
+	background-color: rgba(212, 203, 203, 0.663);
+	box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
 	color: white;
 	margin-bottom: var(--item-margin);
 	margin: 1rem;
+	padding: 1rem;
+}
+
+.recomms-hr {
+	color: black;
 }
 
 .item-link {
