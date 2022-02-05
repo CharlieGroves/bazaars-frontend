@@ -11,26 +11,28 @@
 	max-width: 20rem;
 	height: auto;
 	border-radius: 0.25rem;
-	background-color: rgba(212, 203, 203, 0.663);
-	box-shadow: 4px 8px 5rem var(--drop-shadow-colour);
+	box-shadow: 1px 2px 1rem var(--drop-shadow-colour);
 	color: white;
 	margin-bottom: var(--item-margin);
 	margin: 1rem;
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
 	padding: 1rem;
 }
 
-.recomms-hr {
+.hr-recomms {
 	color: black;
 }
 
 .item-link {
 	color: black;
-	margin-left: var(--item-margin);
+	left: var(--item-margin);
 	text-decoration: none;
 }
 
 .item-price {
-	margin-left: var(--item-margin);
+	color: black;
 }
 
 .item-image-container {

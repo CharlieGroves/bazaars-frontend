@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
 
 export default function ShopItemRecomms(props) {
     const {itemsData} = props;
@@ -24,6 +25,7 @@ export default function ShopItemRecomms(props) {
 							{item.values.itemName}:
 							<br />
 						</Link>
+                        <Rating allowHalfIcon readonly className="review-rating" size={20} ratingValue={item.values.MeanRating/20} />
 						<div className="item-price">£{item.values.itemPrice}</div>
 					</div>
 				))

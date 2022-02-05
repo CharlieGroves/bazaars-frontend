@@ -3,10 +3,26 @@ import "../svg/shopping-cart.svg";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function ShoppingCart(props) {
 	const { shoppingCart } = props;
 	const history = useHistory();
+	console.log(shoppingCart);
+	
+	let cart = shoppingCart;
+
+	for(let x = 0; x<=cart.length-1; x++) {
+		axios
+			.get(process.env.REACT_APP_BACKEND_IP + "get/single-item/" + cart[x])
+			.then((response) => {
+				cart[x][1] = response
+			})
+			.catch((error) => {});
+		console.log(cart)
+		console.log(cart[x][1])
+	}
+
 
 	return (
 		<div>
@@ -30,7 +46,7 @@ export default function ShoppingCart(props) {
 							}
 							key={index}
 						>
-							{item.itemName}&nbsp;£{item.itemPrice}
+							{item}&nbsp;£{item.itemPrice}
 						</div>
 					))
 				) : (
