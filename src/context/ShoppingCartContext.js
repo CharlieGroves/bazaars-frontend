@@ -11,6 +11,7 @@ export function useShoppingCart() {
 export function ShoppingCartProvider({ children }) {
 	const [shoppingCart, setShoppingCart] = useState([]);
 	const { currentUser } = useAuth();
+	const [cartTotal, setCartTotal] = useState(0);
 
 	async function getShoppingCart() {
 		axios
@@ -26,9 +27,7 @@ export function ShoppingCartProvider({ children }) {
 	}
 
 	async function addToCart(item) {
-		console.log(item, shoppingCart)
-		setShoppingCart(shoppingCart.push(item.itemName));
-		console.log(shoppingCart);
+		setShoppingCart([...shoppingCart, item]);
 		axios
 			.post(
 				process.env.REACT_APP_BACKEND_IP +
@@ -36,12 +35,19 @@ export function ShoppingCartProvider({ children }) {
 					currentUser.uid,
 				shoppingCart
 			)
-			.then(() => getShoppingCart());
 	}
 
 	function removeFromCart(item) {
 		const index = shoppingCart.indexOf(item);
 		setShoppingCart(shoppingCart.splice(index, 1));
+	}
+
+	function getShoppingCartTotal() {
+		let total = 0;
+		for (let i = 0; i < shoppingCart.length; i++) {
+			total += shoppingCart[i].itemPrice;
+		}
+		setCartTotal(Math.round(total * 100) / 100)
 	}
 
 	const value = {
@@ -50,6 +56,8 @@ export function ShoppingCartProvider({ children }) {
 		addToCart,
 		removeFromCart,
 		getShoppingCart,
+		cartTotal,
+		getShoppingCartTotal
 	};
 
 	return (

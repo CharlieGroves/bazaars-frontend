@@ -13,6 +13,7 @@ import Item from "./components/Item";
 import ManageAccount from "./components/ManageAccount";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search";
+import Checkout from "./components/Checkout";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<ShoppingCartProvider>
 					<Switch>
 						<PrivateRoute path="/home" component={Home} />
+						<Route path="/checkout" component={Checkout} />
 						<Route path="/signin" component={SignIn} />
 						<Route
 							path="/seller/:seller/:shop/:item"

@@ -29,6 +29,8 @@ export default function Item({
 		addToCart,
 		removeFromCart,
 		getShoppingCart,
+		cartTotal,
+		getShoppingCartTotal,
 	} = useShoppingCart();
 
 	const handleRating = (rate) => {
@@ -54,7 +56,6 @@ export default function Item({
 			})
 			.catch((error) => {});
 
-		console.log(recommend);
 		axios
 			.post(
 				process.env.REACT_APP_BACKEND_IP + "recommend/item/item",
@@ -99,7 +100,11 @@ export default function Item({
 
 	return (
 		<div>
-			<Header shoppingCart={shoppingCart} />
+			<Header
+				shoppingCart={shoppingCart}
+				cartTotal={cartTotal}
+				getShoppingCartTotal={getShoppingCartTotal}
+			/>
 			<div className="items-grid-container">
 				<div className="items-grid">
 					<div className="item-grid-header" />

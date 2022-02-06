@@ -4,7 +4,7 @@ import ShoppingCart from "./ShoppingCart";
 import "../css/Header.css";
 
 export default function Header(props) {
-	const { shoppingCart, addToCart, removeFromCart } = props;
+	const { shoppingCart, addToCart, removeFromCart, cartTotal, getShoppingCartTotal } = props;
 	return (
 		<div className="header-container">
 			<SearchBar />
@@ -12,6 +12,8 @@ export default function Header(props) {
 				shoppingCart={shoppingCart}
 				addToCart={addToCart}
 				removeFromCart={removeFromCart}
+				cartTotal={cartTotal}
+				getShoppingCartTotal={getShoppingCartTotal}
 			/>
 		</div>
 	);

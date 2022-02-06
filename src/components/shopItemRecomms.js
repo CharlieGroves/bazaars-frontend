@@ -9,7 +9,6 @@ export default function ShopItemRecomms(props) {
 			{itemsData ? (
 				itemsData.map((item, index) => (
 					<div className="item" key={index}>
-                        {console.log(item.values)}
 						<div className="item-image-container">
 							<img
 								alt={item.values.name}

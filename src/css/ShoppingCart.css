@@ -1,0 +1,10 @@
+.shopping-cart-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.shopping-cart-item {
+    max-height: 1.33em; /* Or whatever line height works for you */
+    word-break: break-all;
+    overflow: hidden;
+}
