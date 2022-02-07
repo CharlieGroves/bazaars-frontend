@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
 import axios from "axios";
+import "../css/Google.css";
 
 export default function SignInWithGoogleButton(props) {
 	const {
@@ -13,7 +14,7 @@ export default function SignInWithGoogleButton(props) {
 	} = props;
 
 	const urlsRef = firestore.collection("urls");
-	
+
 	const [error, setError] = useState("");
 
 	const handleSignIn = async (provider) => {
@@ -38,7 +39,7 @@ export default function SignInWithGoogleButton(props) {
 					shoppingCart: [],
 					createdAt: Date.now(),
 				};
-				console.log(user)
+				console.log(user);
 
 				axios
 					.post(

@@ -17,3 +17,9 @@
 .welcome-body-main-section-heading, .welcome-body-second-section-heading {
     font-size: 1.25rem;
 }
+
+.popular-items {
+	margin-left: 3rem;
+	font-weight: 400;
+	font-size: 2rem;
+}

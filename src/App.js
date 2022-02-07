@@ -14,6 +14,7 @@ import ManageAccount from "./components/ManageAccount";
 import Welcome from "./components/Welcome";
 import Search from "./components/Search";
 import Checkout from "./components/Checkout";
+import ManageShop from "./components/ManageShop";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					<Switch>
 						<PrivateRoute path="/home" component={Home} />
 						<Route path="/checkout" component={Checkout} />
+						<Route path="/manage/:seller/:shop" component={ManageShop} />
 						<Route path="/signin" component={SignIn} />
 						<Route
 							path="/seller/:seller/:shop/:item"

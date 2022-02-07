@@ -6,7 +6,7 @@ import axios from "axios";
 import { googleProvider } from "../context/authMethods";
 import socialMediaAuth from "../socialMediaAuth";
 import SignInWithGoogleButton from "./SignInWithGoogleButton";
-import ShopItem from "./shopItem";
+import ShopItemRecomms from "./shopItemRecomms";
 
 import "../css/Buttons.css";
 import "../css/Loader.css";
@@ -15,6 +15,8 @@ import "../css/Welcome.css";
 import "../css/Titles.css";
 import "../css/Margins.css";
 import "../css/Paddings.css";
+import Header from "./Header";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export default function Welcome() {
 	const history = useHistory();
@@ -22,66 +24,44 @@ export default function Welcome() {
 	const [itemsData, setItemsData] = useState();
 	const [query, setQuery] = useState("");
 	const [data, setData] = useState();
+	const { shoppingCart, cartTotal, getShoppingCartTotal } = useShoppingCart();
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_BACKEND_IP + "get/30/items")
-			.then((response) => {
-				setItemsData(response.data);
-				setData(response.data);
+			.get(process.env.REACT_APP_BACKEND_IP + "recommend/welcome")
+			.then(({ data: { recomms } }) => {
+				console.log(recomms);
+				setItemsData(recomms);
+				setData(recomms);
 			})
 			.catch((error) => {
 				console.log(error.response.status);
 			});
 	}, []);
 
-
-	
-	const searchQuery = (e) => {
-		e.preventDefault();
-		if (query) {
-			if (query.length !== 0) {
-				setQuery(query.toLowerCase());
-				let placeholder = [];
-				for (let x = 0; x < data.length; x++) {
-					if (data[x].tags.toLowerCase().includes(query)) {
-						placeholder.push(data[x]);
-					}
-				}
-				if (placeholder.length !== 0) return setItemsData(placeholder);
-				return setItemsData([]);
-			}
-			return setItemsData(data);
-		}
-		return setItemsData(data);
-	};
-
 	return (
 		<div className="welcome-container">
-			<div className="search-bar">
-				<form onSubmit={searchQuery}>
-					<input
-						value={query}
-						onChange={(e) => setQuery(e.target.value)}
-					/>
-				</form>
-			</div>
+			<SignInWithGoogleButton
+				loading={loading}
+				setLoading={setLoading}
+				socialMediaAuth={socialMediaAuth}
+				history={history}
+				GoogleButton={GoogleButton}
+				googleProvider={googleProvider}
+			/>
+			<Header
+				shoppingCart={shoppingCart}
+				cartTotal={cartTotal}
+				getShoppingCartTotal={getShoppingCartTotal}
+			/>
 			<div className="welcome-header">
-				<div className="welcome-header-app-name title ml-1">
+				{/* <div className="welcome-header-app-name title ml-1">
 					App Name TBD
-				</div>
+				</div> */}
 				<div className="welcome-header-sign-in">
-					<SignInWithGoogleButton
-						loading={loading}
-						setLoading={setLoading}
-						socialMediaAuth={socialMediaAuth}
-						history={history}
-						GoogleButton={GoogleButton}
-						googleProvider={googleProvider}
-					/>
 				</div>
 			</div>
-			<div className="welcome-body-container">
+			{/* <div className="welcome-body-container">
 				<div className="welcome-body-main-section-container pl-2 pr-2 ml-2 mr-2 pt-2 pb-2">
 					<div className="welcome-body-main-section-heading">
 						Are you a small business owner, or want to take more
@@ -103,8 +83,9 @@ export default function Welcome() {
 						<i>App Name TBD1</i> is the software for you.
 					</div>
 				</div>
-			</div>
-			{itemsData && <ShopItem itemsData={itemsData} />}
+			</div> */}
+			<div className="popular-items">Popular items</div>
+			<ShopItemRecomms itemsData={itemsData} />
 		</div>
 	);
 }
