@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useRef, useEffect } from "react";
 
 export default function PayPal({ shoppingCart }) {
@@ -45,6 +46,9 @@ export default function PayPal({ shoppingCart }) {
 					onApprove: async (data, actions) => {
 						const order = await actions.order.capture();
 						console.log(order);
+						axios.post(
+							
+						)
 					},
 					onError: (err) => {
 						console.log(err);
