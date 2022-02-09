@@ -1,0 +1,45 @@
+.manage-shop-container {
+	margin-left: 2rem;
+}
+
+.graph-container {
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
+	padding: 1rem;
+	max-width: 680px;
+}
+
+.item-container {
+	justify-content: start;
+	margin: 0;
+	margin-top: 1rem;
+}
+
+.manage-shop-title {
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
+	padding: 1rem;
+	max-width: 680px;
+	margin-top: 1rem;
+}
+
+.item {
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+@keyframes bounce {
+	0% {
+		transform: scale(0);
+	}
+
+	80% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
