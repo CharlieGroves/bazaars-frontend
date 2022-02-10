@@ -30,6 +30,8 @@ export default function ManageShop({
 	const [bestItemData, setBestItemData] = useState();
 	const [worstItemData, setWorstItemData] = useState();
 	const [totalRevenue, setTotalRevenue] = useState(0);
+	const [bestItemTotal, setBestItemTotal] = useState(0);
+	const [worstItemTotal, setWorstItemTotal] = useState(0);
 	useEffect(() => {
 		// axios
 		// 	.get(process.env.REACT_APP_BACKEND_IP + "get/item/" + shop)
@@ -44,7 +46,6 @@ export default function ManageShop({
 			.get(process.env.REACT_APP_BACKEND_IP + "get/shop/name/" + shop)
 			.then((response) => {
 				setShopData(response.data);
-				console.log(response.data.sales);
 			})
 			.catch((error) => {
 				console.log(error.response.status);
@@ -53,8 +54,6 @@ export default function ManageShop({
 			.get(process.env.REACT_APP_BACKEND_IP + "get/best/" + shop)
 			.then((response) => {
 				setBestItemData(response.data);
-				console.log(response.data);
-				console.log(response.data.sales);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -64,7 +63,7 @@ export default function ManageShop({
 			.get(process.env.REACT_APP_BACKEND_IP + "get/worst/" + shop)
 			.then((response) => {
 				setWorstItemData(response.data);
-				console.log(response.data.sales);
+				console.log(response.data);
 			})
 			.catch((error) => {
 				console.log(error.response.status);
@@ -75,18 +74,30 @@ export default function ManageShop({
 		console.log(shopData);
 		shopData &&
 			shopData.sales_revenue &&
-			console.log(shopData.sales_revenue);
-		shopData && shopData.sales_revenue && getShopTotal();
+			shopData &&
+			shopData.sales_revenue &&
+			getShopTotal();
 	}, [shopData]);
+
+	useEffect(() => {
+		bestItemData && getItemTotal(bestItemData, setBestItemTotal);
+		worstItemData && getItemTotal(worstItemData[0], setWorstItemTotal);
+	}, [bestItemData, worstItemData]);
 
 	function getShopTotal() {
 		let total = 0;
 		for (let i = 0; i < 12; i++) {
 			total = total + shopData.sales_revenue[i];
-			console.log(shopData.sales_revenue[i]);
-			console.log(total);
 		}
 		return setTotalRevenue(total);
+	}
+
+	function getItemTotal(item, state) {
+		let total = 0;
+		for (let i = 0; i < 12; i++) {
+			item.sales[i] !== undefined && (total = total + item.sales[i]);
+		}
+		return state(total);
 	}
 
 	return (
@@ -106,27 +117,39 @@ export default function ManageShop({
 					{bestItemData && (
 						<div>
 							<h3>Best Item:</h3>
-							{/* <p>Sales {bestItemData.sales[2]}</p> */}
+							<p>Sales {bestItemTotal}</p>
+							<p>
+								Revenue £
+								{bestItemTotal * bestItemData.itemPrice}
+							</p>
 						</div>
 					)}
 					{bestItemData && (
-						<div className="best-item">
-							<div className="item-image-container">
-								<img
-									alt={bestItemData.name}
-									className="item-image"
-									src={bestItemData.itemImageURL}
-								/>
+						<div>
+							<div className="best-item">
+								<div className="item-image-container">
+									<img
+										alt={bestItemData.name}
+										className="item-image"
+										src={bestItemData.itemImageURL}
+									/>
+								</div>
+								<Link
+									to={`/seller/${bestItemData.sellerId}/${bestItemData.shopName}/${bestItemData.itemName}`}
+									className="item-link"
+								>
+									{bestItemData.itemName}:
+									<br />
+								</Link>
+								<div className="item-price">
+									£{bestItemData.itemPrice}
+								</div>
 							</div>
-							<Link
-								to={`/seller/${bestItemData.sellerId}/${bestItemData.shopName}/${bestItemData.itemName}`}
-								className="item-link"
-							>
-								{bestItemData.itemName}:
-								<br />
-							</Link>
-							<div className="item-price">
-								£{bestItemData.itemPrice}
+							<div style={{ marginBottom: "1rem" }}>
+								Tags:
+								{bestItemData.tags.map((tag, index) => (
+									<div key={index}>{tag}</div>
+								))}
 							</div>
 						</div>
 					)}
@@ -134,11 +157,24 @@ export default function ManageShop({
 				<div>
 					{worstItemData && (
 						<div>
-							<h3>Worst Item:</h3>
-							{/* <p>Sales {worstItemData.sales[2]}</p> */}
+							<div>
+								<h3>Worst Item:</h3>
+								<p>Sales {worstItemTotal}</p>
+								<p>
+									Revenue £
+									{worstItemTotal *
+										worstItemData[0].itemPrice}
+								</p>
+							</div>
+							<ShopItem itemsData={worstItemData} />
+							<div style={{ marginBottom: "1rem" }}>
+								Tags:
+								{worstItemData[0].tags.map((tag, index) => (
+									<div key={index}>{tag}</div>
+								))}
+							</div>
 						</div>
 					)}
-					{worstItemData && <ShopItem itemsData={worstItemData} />}
 				</div>
 			</div>
 
@@ -150,7 +186,6 @@ export default function ManageShop({
 						[...Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)].map(
 							(x, i) => {
 								const y = max - (max * shopData.sales[x]) / 100;
-								console.log(x);
 								return (
 									<SingleBar
 										key={i}
