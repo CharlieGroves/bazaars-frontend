@@ -14,7 +14,7 @@
 	box-shadow: 1px 2px 1rem var(--drop-shadow-colour);
 	color: white;
 	margin-bottom: var(--item-margin);
-	margin: 1rem;
+	margin: 1rem!important;
 	border-style: solid;
 	border-radius: 8px;
 	border-color: #d1d1d1;

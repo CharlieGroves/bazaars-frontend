@@ -1,5 +1,6 @@
 .manage-shop-container {
 	margin-left: 2rem;
+	margin-bottom: 1 rem;
 }
 
 .graph-container {
@@ -8,12 +9,13 @@
 	border-color: #d1d1d1;
 	padding: 1rem;
 	max-width: 680px;
-}
+	margin-left: 1rem;
+} 
 
 .item-container {
 	justify-content: start;
 	margin: 0;
-	margin-top: 1rem;
+	padding-bottom: 0;
 }
 
 .manage-shop-title {
@@ -23,11 +25,44 @@
 	padding: 1rem;
 	max-width: 680px;
 	margin-top: 1rem;
+	margin-left: 1rem;
+}
+
+.details {
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
+	padding: 1rem;
+	max-width: 680px;
+	margin-top: 1rem;
+}
+
+.best-item {
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	max-width: 20rem;
+}
+
+.best-container {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.details, h3 {
+	margin-left: 1rem;
 }
 
 .item {
 	margin: 0;
 	margin-bottom: 1rem;
+}
+
+.best-and-worst-container {
+	display: flex;
+	max-width: 747px;
 }
 
 @keyframes bounce {
