@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useRef, useEffect } from "react";
+import { useAuth } from "../context/AuthenticationContext";
 
 export default function PayPal({ shoppingCart }) {
 	const paypal = useRef();
 	let paypalTotal = 0;
+	const currentUser = useAuth();
 
 	useEffect(() => {
 		for (let i = 0; i < shoppingCart.length; i++) {
@@ -45,10 +47,20 @@ export default function PayPal({ shoppingCart }) {
 					},
 					onApprove: async (data, actions) => {
 						const order = await actions.order.capture();
-						console.log(order);
+						const { uid, displayName, photoURL } = currentUser;
+						const user = {
+							id: uid,
+							username: displayName,
+							url: displayName,
+							admin: false,
+							photoURL: photoURL,
+							shoppingCart: [],
+							createdAt: Date.now(),
+						};
 						axios.post(
-							
-						)
+							process.env.REACT_APP_BACKEND_IP + "post/newuser",
+							user
+						);
 					},
 					onError: (err) => {
 						console.log(err);

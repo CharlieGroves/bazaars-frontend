@@ -65,6 +65,26 @@
 	max-width: 747px;
 }
 
+.discount-form {
+	border-style: solid;
+	border-radius: 8px;
+	border-color: #d1d1d1;
+	padding: 1rem;
+	max-width: 680px;
+	margin-left: 1rem;
+	margin-top: 1rem;
+}
+
+.discount-label {
+	margin-right: 1rem;
+}
+
+.discount-input {
+	margin-left: 1rem;
+}
+
+
+
 @keyframes bounce {
 	0% {
 		transform: scale(0);

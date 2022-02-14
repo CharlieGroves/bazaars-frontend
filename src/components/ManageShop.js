@@ -32,6 +32,7 @@ export default function ManageShop({
 	const [totalRevenue, setTotalRevenue] = useState(0);
 	const [bestItemTotal, setBestItemTotal] = useState(0);
 	const [worstItemTotal, setWorstItemTotal] = useState(0);
+	const [discountPercentage, setDiscountPercentage] = useState(0);
 	useEffect(() => {
 		// axios
 		// 	.get(process.env.REACT_APP_BACKEND_IP + "get/item/" + shop)
@@ -100,12 +101,42 @@ export default function ManageShop({
 		return state(total);
 	}
 
+	function sendEmailOffers(e) {
+		e.preventDefault();
+		axios.post(
+			process.env.REACT_APP_BACKEND_IP +
+				"/post/recommend/shop/" +
+				shop +
+				"/" +
+				discountPercentage
+		);
+	}
+
 	return (
 		<div className="manage-shop-container">
 			<div className="manage-shop-title">
 				Welcome {seller}! You're managing {shop}
 			</div>
-
+			<div>
+				<form onSubmit={sendEmailOffers} className="discount-form">
+					<label className="discount-label">
+						Percentage Discount
+						<input
+							className="discount-input"
+							value={discountPercentage}
+							type="int"
+							min="0"
+							max="50"
+							onChange={(e) =>
+								setDiscountPercentage(e.target.value)
+							}
+						/>
+					</label>
+					<button className="disoun-button" type="submit">
+						Send email offers
+					</button>
+				</form>
+			</div>
 			<div className="details">
 				{shopData && shopData.sales_revenue && (
 					<div>Total Revenue £{totalRevenue}</div>

@@ -64,6 +64,15 @@ export default function Item({
 			.then(({ data: { recomms } }) => {
 				setRecomms(recomms);
 			});
+		console.log(currentUser.uid);
+		console.log(item);
+		axios.post(
+			process.env.REACT_APP_BACKEND_IP +
+				"post/item/interaction/" +
+				currentUser.uid +
+				"/" +
+				item
+		);
 		getShoppingCart();
 	}, [item]);
 
