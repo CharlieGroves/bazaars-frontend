@@ -95,8 +95,13 @@ export default function ManageShop({
 
 	function getItemTotal(item, state) {
 		let total = 0;
-		for (let i = 0; i < 12; i++) {
-			item.sales[i] !== undefined && (total = total + item.sales[i]);
+		if (item) {
+			if (item.sales) {
+				for (let i = 0; i < 12; i++) {
+					item.sales[i] !== undefined &&
+						(total = total + item.sales[i]);
+				}
+			}
 		}
 		return state(total);
 	}
@@ -178,15 +183,17 @@ export default function ManageShop({
 							</div>
 							<div style={{ marginBottom: "1rem" }}>
 								Tags:
-								{bestItemData.tags.map((tag, index) => (
-									<div key={index}>{tag}</div>
-								))}
+								{bestItemData &&
+									bestItemData.tags &&
+									bestItemData.tags.map((tag, index) => (
+										<div key={index}>{tag}</div>
+									))}
 							</div>
 						</div>
 					)}
 				</div>
 				<div>
-					{worstItemData && (
+					{worstItemData && worstItemTotal && (
 						<div>
 							<div>
 								<h3>Worst Item:</h3>

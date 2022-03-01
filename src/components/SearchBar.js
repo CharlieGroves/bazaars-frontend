@@ -18,7 +18,7 @@ export default function SearchBar(props) {
 					<input
 						className="search-bar-input"
 						value={query}
-						placeholder="Search here"
+						placeholder={props.query ? props.query : "Search here"}
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 				</form>

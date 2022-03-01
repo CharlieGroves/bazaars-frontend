@@ -14,7 +14,7 @@ export default function Search({
 	const [data, setData] = useState();
 	const [sort, setSort] = useState("relevent");
 
-	const sorting = ["relevent", "asc", "dsc"];
+	const sorting = ["relevant", "asc", "dsc"];
 
 	let sortingList = [];
 	sorting.forEach(function (element) {
@@ -22,8 +22,9 @@ export default function Search({
 	});
 
 	let temp_query = query;
-	console.log(temp_query);
+
 	query = query.split(" ").join("");
+
 	useEffect(() => {
 		axios
 			.get(
@@ -42,7 +43,7 @@ export default function Search({
 
 	return (
 		<div>
-			<SearchBar style={{ marginBottom: "2rem" }} />
+			<SearchBar query={query} style={{ marginBottom: "2rem" }} />
 			<div className="select-container">
 				<Select
 					required
